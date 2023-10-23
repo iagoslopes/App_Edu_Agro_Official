@@ -1,8 +1,8 @@
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, Navigate } from 'react-router-dom';
-import { auth } from '../../services/firebaseConfig';
 import logo from '../../assets/img_logo.png';
+import { auth } from '../../services/firebaseConfig';
 import './style.css';
 
 export function Login() {
@@ -22,21 +22,9 @@ export function Login() {
     signInWithEmailAndPassword(email,password);
   }
 
-  if (error) {
+  if(user) {
     return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
-
-  if(loading) {
-    return <p>carregando...</p>
-  }
-
-  if (user) {
-    return (
-      <Navigate to="/home"/>
+      <Navigate to='/home' />
     );
   }
 
@@ -51,7 +39,7 @@ export function Login() {
         <div className="inputContainer">
           <label htmlFor="email">E-mail</label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             placeholder="example@email.com"
