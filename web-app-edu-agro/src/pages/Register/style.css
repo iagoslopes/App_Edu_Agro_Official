@@ -1,0 +1,110 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.container .header span {
+    padding-top: 8px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.container form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container form .inputContainer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.container form .inputContainer label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+
+.container form .inputContainer input {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+
+    width: 520px;
+    height: 49px;
+
+    border: 1px solid green;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.container form a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: green;
+}
+
+.container form .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    width: 520px;
+    height: 48px;
+
+    background: green;
+    border-radius: 12px;
+
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.container form .button:hover {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.container form .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container form .footer p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+}
+
+.container form .footer a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: green;
+}
