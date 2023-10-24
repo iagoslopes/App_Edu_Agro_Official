@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
 import { isEmail } from "validator";
 import logo from '../../assets/img_logo.png';
+import Snackbar from '@mui/material/Snackbar';
 import './style.css';
+
+function AuthPopup({ open, message, onClose }) {
+  return (
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      open={open}
+      autoHideDuration={6000} // Define a duração que o pop-up ficará visível
+      onClose={onClose}
+      message={message}
+    />
+  );
+}
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [erros, setErros] = useState();
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
   const {
     handleSubmit,
     formState: { errors },
@@ -16,16 +32,26 @@ export const Register = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    //console.log(data)
     await createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         navigate("/")
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        if (error.code === 'auth/email-already-in-use') {
+          // Email já em uso
+          setErros('Este email já está em uso. Tente outro.');
+          setPopupOpen(true);
+        } else {
+          // Outros erros
+          setError('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
+          setPopupOpen(true);
+        }
+        
       });
+  }
+
+  const handleClosePopup = () => {
+    setPopupOpen(false);
   }
 
   return (
@@ -82,6 +108,8 @@ export const Register = () => {
         <button type="submit" className="button">
           Cadastrar
         </button>
+
+        <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
         <div className="footer">
           <p>Já tem uma conta? </p>

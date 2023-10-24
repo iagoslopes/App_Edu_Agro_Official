@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
 import { isEmail } from "validator";
 import logo from '../../assets/img_logo.png';
+import Snackbar from '@mui/material/Snackbar';
 import './style.css';
+
+function AuthPopup({ open, message, onClose }) {
+  return (
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      open={open}
+      autoHideDuration={6000} // Define a duração que o pop-up ficará visível
+      onClose={onClose}
+      message={message}
+    />
+  );
+}
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [erros, setErros] = useState();
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
   const {
     handleSubmit,
     formState: { errors },
@@ -16,16 +32,25 @@ export const Login = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    //console.log(data)
     await signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         navigate("/home")
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        if (error.code === 'auth/invalid-login-credentials') {
+          // Erro de credenciais
+          setErros('Usuário e/ou Senha incorreto');
+          setPopupOpen(true);
+        } else {
+          // Outros erros
+          setErros('Ocorreu um erro ao autenticar. Por favor, tente novamente mais tarde.');
+          setPopupOpen(true);
+        }
       });
+  }
+
+  const handleClosePopup = () => {
+    setPopupOpen(false);
   }
 
   return (
@@ -84,6 +109,8 @@ export const Login = () => {
         <button type="submit" className="button">
           Entrar
         </button>
+
+        <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
         <div className="footer">
           <p>Não tem uma conta? </p>
