@@ -1,3 +1,34 @@
+import React from 'react';
+import {  signOut } from "firebase/auth";
+import { auth } from '../../services/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
+
 export const Home = () => {
-    return <h1>Home</h1>
+    const navigate = useNavigate();
+ 
+    const handleLogout = () => {               
+        signOut(auth).then(() => {
+        // Sign-out successful.
+            navigate("/");
+            console.log("Signed out successfully")
+        }).catch((error) => {
+        // An error happened.
+        });
+    }
+    
+    return (
+        <>
+            <nav>
+                <p>
+                    Welcome Home
+                </p>
+ 
+                <div>
+        			<button onClick={handleLogout}>
+                        Logout
+                    </button>
+        		</div>
+            </nav>
+        </>
+    )
 };

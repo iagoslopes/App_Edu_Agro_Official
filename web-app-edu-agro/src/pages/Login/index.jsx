@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, Navigate } from 'react-router-dom';
-import logo from '../../assets/img_logo.png';
+import React from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
+import { useForm } from 'react-hook-form';
+import { isEmail } from "validator";
+import logo from '../../assets/img_logo.png';
 import './style.css';
 
-export function Login() {
+export const Login = () => {
+  const navigate = useNavigate();
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+  } = useForm();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
-
-  function handleSignIn(e) {
-    e.preventDefault();
-    signInWithEmailAndPassword(email,password);
-  }
-
-  if(user) {
-    return (
-      <Navigate to='/home' />
-    );
+  async function onSubmit(data) {
+    //console.log(data)
+    await signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        navigate("/home")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   }
 
   return (
@@ -35,32 +35,53 @@ export function Login() {
         <span>Login</span>
       </header>
 
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="inputContainer">
           <label htmlFor="email">E-mail</label>
           <input
-            type="email"
-            name="email"
+            className={errors?.email && "input-error"}
             id="email"
+            name="email"
+            type="email"
             placeholder="example@email.com"
-            onChange={(e) => setEmail(e.target.value)}
+            {...register("email", {
+              required: true,
+              validate: (value) => isEmail(value),
+            })}
           />
+          {errors?.email?.type === "required" && (
+            <p className="error-message">Email is required.</p>
+          )}
+
+          {errors?.email?.type === "validate" && (
+            <p className="error-message">Email is invalid.</p>
+          )}
         </div>
 
         <div className="inputContainer">
           <label htmlFor="password">Password</label>
           <input
+            className={errors?.password && "input-error"}
             type="password"
-            name="password"
             id="password"
             placeholder="*********"
-            onChange={(e) => setPassword(e.target.value)}
+            autoComplete='off'
+            {...register("password", { required: true, minLength: 6 })}
           />
+          {errors?.password?.type === "required" && (
+            <p className="error-message">Password is required.</p>
+          )}
+
+          {errors?.password?.type === "minLength" && (
+            <p className="error-message">
+              Password needs to have at least 6 characters.
+            </p>
+          )}
         </div>
 
         <a href="">Esqueceu sua senha?</a>
 
-        <button className="button" onClick={handleSignIn}>
+        <button type="submit" className="button">
           Entrar
         </button>
 
