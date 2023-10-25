@@ -6,6 +6,7 @@ import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
 import './style.css';
 
+
 function AuthPopup({ open, message, onClose }) {
     return (
         <Snackbar

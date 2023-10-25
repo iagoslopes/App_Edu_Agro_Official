@@ -112,6 +112,7 @@ export const Login = () => {
           )}
         </div>
 
+            
         <div className="footer">
           <Link to="/recuperarSenha">Esqueceu sua senha?</Link>
         </div>
