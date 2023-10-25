@@ -106,7 +106,7 @@ export const Login = () => {
 
         <a href="">Esqueceu sua senha?</a>
 
-        <button type="submit" className="button">
+        <button type="submit" className="button" id='button'>
           Entrar
         </button>
 

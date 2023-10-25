@@ -23,6 +23,7 @@
 }
 
 .container form {
+    width: 60%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -30,6 +31,7 @@
 
 .container form .inputContainer {
     display: flex;
+    width: 60%;
     align-items: flex-start;
     flex-direction: column;
 }
@@ -41,13 +43,14 @@
     margin-bottom: 8px;
 }
 
-.container form .inputContainer input {
+.container form .inputContainer #email,
+.container form .inputContainer #password {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding: 16px;
 
-    width: 520px;
+    width: 100%;
     height: 49px;
 
     border: 1px solid green;
@@ -65,14 +68,14 @@
     color: green;
 }
 
-.container form .button {
+.container form #button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border: none;
 
-    width: 520px;
+    width: 60%;
     height: 48px;
 
     background: green;
@@ -82,7 +85,7 @@
     line-height: 22px;
 }
 
-.container form .button:hover {
+.container form #button:hover {
     cursor: pointer;
     font-size: 25px;
 }
@@ -111,10 +114,20 @@
 
 .containter form .input-error {
     outline: 1px solid rgb(255, 72, 72);
-  }
-  
+}
+
 .container form .error-message {
     color: rgb(255, 72, 72);
     font-size: 0.75rem;
     margin-bottom: 5px;
-  }
+}
+
+@media screen and (max-width: 768px) {
+    .container form .inputContainer {
+        width: 80%;
+    }
+
+    .container form #button {
+        width: 80%;
+    }
+}
