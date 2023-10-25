@@ -80,7 +80,7 @@ export const RecuperarSenha = () => {
                 <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
                 <div className="footer">
-                    <a href="/">Voltar</a>
+                <Link to="/">Clique aqui!</Link>
                 </div>
             </form>
         </div>
