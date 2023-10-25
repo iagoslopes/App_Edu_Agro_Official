@@ -105,7 +105,7 @@ export const Register = () => {
           )}
         </div>
 
-        <button type="submit" className="button">
+        <button type="submit" className="button" id='button'>
           Cadastrar
         </button>
 
