@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
@@ -80,7 +81,7 @@ export const RecuperarSenha = () => {
                 <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
                 <div className="footer">
-                    <a href="/">Voltar</a>
+                    <Link to="/">Voltar</Link>
                 </div>
             </form>
         </div>
