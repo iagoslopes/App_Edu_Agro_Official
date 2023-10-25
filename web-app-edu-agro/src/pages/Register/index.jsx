@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
@@ -32,9 +32,15 @@ export const Register = () => {
   } = useForm();
 
   async function onSubmit(data) {
+    setErros('Carregando...');
+    setPopupOpen(true);
     await createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        navigate("/")
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            setErros('Usuário criado com sucesso. Verifique o seu e-mail');
+            setPopupOpen(true);
+          });
       })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
@@ -46,7 +52,7 @@ export const Register = () => {
           setError('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
           setPopupOpen(true);
         }
-        
+
       });
   }
 

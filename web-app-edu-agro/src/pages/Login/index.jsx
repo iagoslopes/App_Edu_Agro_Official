@@ -24,6 +24,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const user = auth.currentUser;
 
   const {
     handleSubmit,
@@ -32,21 +33,28 @@ export const Login = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    await signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        navigate("/home")
-      })
-      .catch((error) => {
-        if (error.code === 'auth/invalid-login-credentials') {
-          // Erro de credenciais
-          setErros('Usuário e/ou Senha incorreto');
-          setPopupOpen(true);
-        } else {
-          // Outros erros
-          setErros('Ocorreu um erro ao autenticar. Por favor, tente novamente mais tarde.');
-          setPopupOpen(true);
-        }
-      });
+    setErros('Carregando...');
+    setPopupOpen(true);
+    if (user && !user.emailVerified) {
+      setErros('E-mail não foi verificado ainda.');
+      setPopupOpen(true);
+    } else {
+      await signInWithEmailAndPassword(auth, data.email, data.password)
+        .then(() => {
+          navigate("/home")
+        })
+        .catch((error) => {
+          if (error.code === 'auth/invalid-login-credentials') {
+            // Erro de credenciais
+            setErros('Usuário e/ou Senha incorreto');
+            setPopupOpen(true);
+          } else {
+            // Outros erros
+            setErros('Ocorreu um erro ao autenticar. Por favor, tente novamente mais tarde.');
+            setPopupOpen(true);
+          }
+        });
+    }
   }
 
   const handleClosePopup = () => {
@@ -104,7 +112,7 @@ export const Login = () => {
           )}
         </div>
 
-        <a href="">Esqueceu sua senha?</a>
+        <a href="/recuperarSenha">Esqueceu sua senha?</a>
 
         <button type="submit" className="button" id='button'>
           Entrar
