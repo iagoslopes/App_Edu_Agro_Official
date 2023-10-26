@@ -1,0 +1,110 @@
+*,
+*::after, 
+*::before {
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: darkgray;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    background: rgb(190, 255, 190);
+}
+.nav_brand {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 1%;
+    width: 20%;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+}
+.nav_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 60%;
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3rem;
+}
+.user_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+.nav_toggler div {
+    width: 3rem;
+    height: 0.2rem;
+    margin: 0.4rem;
+    background: darkgray;
+    transition: 0.4s ease-in;
+}
+.nav_toggler {
+    cursor: pointer;
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav_toggler {
+        display: block;
+    }
+    .item {
+        flex-direction: column;
+    }
+    .nav_menu {
+        position: fixed;
+        top: 7vh;
+        right: 0;
+        width: 50%;
+        height: 93vh;
+        background: rgb(190, 255, 190);
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: 0.5s ease-in;
+        gap: 30%;
+    }
+    .user_email {
+        font-size: 1.3rem;
+    }
+    .icon_user {
+        display: none;
+    }
+}
+
+.nav_active {
+    transform: translateX(0);
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-4px, 5px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-4px, -5px);
+}
