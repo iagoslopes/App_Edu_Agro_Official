@@ -36,12 +36,12 @@ export default function Header() {
                             </Link>
                         </li>
                         <li className="nav_item">
-                            <Link to='sobre' className="nav_link">
+                            <Link to='/sobre' className="nav_link">
                                 Sobre
                             </Link>
                         </li>
                         <li className="nav_item">
-                            <Link to='contato' className="nav_link">
+                            <Link to='/contato' className="nav_link">
                                 Contato
                             </Link>
                         </li>
