@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from "../../components/Header"
 import {  signOut } from "firebase/auth";
 import { auth } from '../../services/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +20,7 @@ export const Home = () => {
     return (
         <>
             <nav>
+            <Header />
                 <p>
                     Welcome Home
                 </p>
