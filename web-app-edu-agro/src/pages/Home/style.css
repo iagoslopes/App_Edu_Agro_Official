@@ -1,0 +1,33 @@
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 92vh;
+  }
+  .app-info {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .app-info h1 {
+    font-size: 2rem;
+    color: green; /* Cor do texto */
+  }
+  
+  .app-info p {
+    font-size: 1.2rem;
+    color: darkgreen; /* Cor do texto */
+    margin: 20px 0;
+  }
+  
+  .app-info a {
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .app-info img {
+    width: 150px;
+    height: 50px;
+    /* Adicione estilos para o ícone da Play Store */
+  }

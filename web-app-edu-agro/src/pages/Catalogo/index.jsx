@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
+import './style.css';
 
 export const Catalogo = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export const Catalogo = () => {
             if (!currentUser) {
                 navigate('/login');
                 return null;
-              } else {
+            } else {
                 setUser(null);
             }
         });
@@ -26,9 +27,9 @@ export const Catalogo = () => {
     return (
         <>
             <Header />
-                <p>
-                    Welcome Catalogo
-                </p>
+            <div className="catalogo-container">
+                Catalogo
+            </div>
             <Footer />
         </>
     )
