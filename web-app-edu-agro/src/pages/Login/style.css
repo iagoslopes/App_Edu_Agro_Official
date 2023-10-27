@@ -66,6 +66,7 @@
     padding-top: 16px;
     padding-bottom: 16px;
     color: green;
+    justify-content: center;
 }
 
 .container form #button {
@@ -92,9 +93,9 @@
 
 .container form .footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 10px;
+    gap: 1px;
 }
 
 .container form .footer p {
@@ -104,7 +105,7 @@
     color: black;
 }
 
-.container form .footer a {
+.container form .footer .footer_link {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -129,5 +130,16 @@
 
     .container form #button {
         width: 80%;
+    }
+
+    .container form .footer {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .container form .footer .footer_link {
+        line-height: 1px;
+        padding: 0;
+        margin-bottom: 10px;
     }
 }

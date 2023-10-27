@@ -1,18 +1,22 @@
 *,
-*::after, 
+*::after,
 *::before {
     margin: 0;
     box-sizing: border-box;
 }
+
 html {
     font-size: 62.5%;
 }
+
 body {
     font-size: 1.6rem;
 }
+
 li {
     list-style: none;
 }
+
 a {
     text-decoration: none;
     color: darkgray;
@@ -24,9 +28,11 @@ a {
     height: 8vh;
     background: rgb(190, 255, 190);
 }
+
 .nav_brand {
     display: none;
 }
+
 .logo {
     display: flex;
     align-items: center;
@@ -35,30 +41,62 @@ a {
     margin-left: 1%;
     width: 100px;
 }
+
 .container {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 80%;
 }
+
 .nav_menu {
     display: flex;
     align-items: center;
     justify-content: space-around;
     gap: 70%;
 }
+
 .item {
     display: flex;
     align-items: center;
     justify-content: space-around;
     gap: 3rem;
 }
+
 .user_container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav_user {
     display: flex;
     align-items: center;
     justify-content: space-around;
     gap: 1rem;
 }
+
+.btn_not_user {
+    white-space: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.btn_not_user .botao_login,
+.btn_not_user .botao_register {
+    color: black;
+}
+
+.btn_not_user .botao_register {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+}
+
 .nav_toggler div {
     width: 3rem;
     height: 0.2rem;
@@ -66,6 +104,7 @@ a {
     background: darkgray;
     transition: 0.4s ease-in;
 }
+
 .nav_toggler {
     cursor: pointer;
     display: none;
@@ -75,16 +114,20 @@ a {
     .nav_toggler {
         display: block;
     }
+
     .nav_brand {
         display: flex;
         color: black;
     }
+
     .logo {
         width: 90px;
     }
+
     .item {
         flex-direction: column;
     }
+
     .nav_menu {
         position: fixed;
         top: 7vh;
@@ -97,12 +140,32 @@ a {
         transition: 0.5s ease-in;
         gap: 30%;
     }
-    .user_email {
-        font-size: 1.3rem;
+
+    .nav_user {
+        width: 40vw;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-    .icon_user {
-        display: none;
+
+    .user p {
+        width: 40vw;
+        font-size: 1.5rem;
+        overflow-wrap: break-word;
     }
+
+    .user .sign_out {
+        width: 40vw;
+        height: 3vh;
+    }
+
+    .btn_not_user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
 }
 
 .nav_active {
@@ -112,9 +175,11 @@ a {
 .toggle .line1 {
     transform: rotate(-45deg) translate(-4px, 5px);
 }
+
 .toggle .line2 {
     opacity: 0;
 }
+
 .toggle .line3 {
     transform: rotate(45deg) translate(-4px, -5px);
 }

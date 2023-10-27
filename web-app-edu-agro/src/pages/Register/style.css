@@ -68,7 +68,7 @@
     color: green;
 }
 
-.container form .button {
+.container form #button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -92,7 +92,7 @@
 
 .container form .footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 10px;
 }
@@ -104,7 +104,7 @@
     color: black;
 }
 
-.container form .footer a {
+.container form .footer .footer_link {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;

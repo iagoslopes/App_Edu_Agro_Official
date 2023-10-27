@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../../services/firebaseConfig';
+import { FaUser } from 'react-icons/fa';
 import logo from '../../assets/img_logo.png';
 import './style.css';
 
 export default function Header() {
     const [active, setActive] = useState('nav_menu');
     const [toggleIcon, setToggleIcon] = useState('nav_toggler');
+    const [user, setUser] = useState(null);
 
     const navToggle = () => {
         active === 'nav_menu'
@@ -15,20 +18,45 @@ export default function Header() {
         toggleIcon === 'nav_toggler'
             ? setToggleIcon('nav_toggler toggle')
             : setToggleIcon('nav_toggler');
-        
+
     };
+
+    const handleSignOut = async () => {
+        try {
+            await auth.signOut();
+            console.log('Usuário desconectado com sucesso.');
+        } catch (error) {
+            console.error('Erro ao desconectar o usuário:', error);
+        }
+    };
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+            } else {
+                setUser(null);
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     return (
         <nav className="nav">
-            <img src={logo} alt="Logo" className='logo'/>
-            <Link to='' className='nav_brand'>
+            <Link to="/">
+                <img src={logo} alt="Logo" className="logo" />
+            </Link>
+            <Link to='/' className='nav_brand'>
                 EducationAgro
             </Link>
             <div className="container">
                 <ul className={active}>
                     <div className="item">
                         <li className="nav_item">
-                            <Link to='/home' className="nav_link">
+                            <Link to='/' className="nav_link">
                                 Home
                             </Link>
                         </li>
@@ -49,15 +77,25 @@ export default function Header() {
                         </li>
                     </div>
                     <div className="user_container">
-                        <div className="user">
-                            <div className="user_email">Email</div>
-                            <button className="sign_out">
-                                SignOut
-                            </button>
-                        </div>
-                        <div className="icon_user">
-                            Icon
-                        </div>
+                        {user ? (
+                            <div className='nav_user'>
+                                <div className="user">
+                                    <p>{user.email}</p>
+                                    <button onClick={handleSignOut} className="sign_out">
+                                        SignOut
+                                    </button>
+                                </div>
+                                <div className="icon_user">
+                                    <FaUser size={32} />
+                                </div>
+                            </div>
+                        ) : (
+                            <div className='btn_not_user'>
+                                <Link className='botao_login' to="/login">Login</Link>
+                                <Link className='botao_register' to="/register">Cadastre-se</Link>
+                            </div>
+                        )}
+
                     </div>
                 </ul>
             </div>

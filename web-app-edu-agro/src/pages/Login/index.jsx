@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
@@ -9,13 +9,17 @@ import Snackbar from '@mui/material/Snackbar';
 import './style.css';
 
 function AuthPopup({ open, message, onClose }) {
+  const messageStyle = {
+    fontSize: '18px',
+  };
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={open}
       autoHideDuration={6000} // Define a duração que o pop-up ficará visível
       onClose={onClose}
-      message={message}
+      message={<span style={messageStyle}>{message}</span>}
     />
   );
 }
@@ -39,9 +43,13 @@ export const Login = () => {
       setErros('E-mail não foi verificado ainda.');
       setPopupOpen(true);
     } else {
-      await signInWithEmailAndPassword(auth, data.email, data.password)
+      await setPersistence(auth, browserLocalPersistence)
         .then(() => {
-          navigate("/home")
+          // Realize o login após definir a persistência
+          return signInWithEmailAndPassword(auth, data.email, data.password);
+        })
+        .then(() => {
+          navigate("/");
         })
         .catch((error) => {
           if (error.code === 'auth/invalid-login-credentials') {
@@ -64,7 +72,9 @@ export const Login = () => {
   return (
     <div className="container">
       <header className="header">
-        <img src={logo} alt="Logo" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
         <span>Login</span>
       </header>
 
@@ -112,9 +122,9 @@ export const Login = () => {
           )}
         </div>
 
-            
+
         <div className="footer">
-          <Link to="/recuperarSenha">Esqueceu sua senha?</Link>
+          <Link className='footer_link' to="/recuperarSenha">Esqueceu sua senha?</Link>
         </div>
 
         <button type="submit" className="button" id='button'>
@@ -125,7 +135,7 @@ export const Login = () => {
 
         <div className="footer">
           <p>Não tem uma conta? </p>
-          <Link to="/register">Clique aqui!</Link>
+          <Link className='footer_link' to="/register">Clique aqui!</Link>
         </div>
       </form>
     </div>

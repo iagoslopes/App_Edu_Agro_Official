@@ -12,9 +12,9 @@ export function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/"  element={<Login />} />
+                <Route path="/login"  element={<Login />} />
                 <Route path="/register"  element={<Register />} />
-                <Route path="/home"  element={<Home />} />
+                <Route path="/"  element={<Home />} />
                 <Route path="/recuperarSenha"  element={<RecuperarSenha />} />
                 <Route path="/contato"  element={<Contato />} />
                 <Route path="/catalogo"  element={<Catalogo />} />

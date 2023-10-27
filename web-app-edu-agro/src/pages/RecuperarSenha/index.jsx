@@ -8,16 +8,20 @@ import './style.css';
 
 
 function AuthPopup({ open, message, onClose }) {
+    const messageStyle = {
+      fontSize: '18px',
+    };
+  
     return (
-        <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            open={open}
-            autoHideDuration={6000} // Define a duração que o pop-up ficará visível
-            onClose={onClose}
-            message={message}
-        />
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={open}
+        autoHideDuration={6000} // Define a duração que o pop-up ficará visível
+        onClose={onClose}
+        message={<span style={messageStyle}>{message}</span>}
+      />
     );
-}
+  }
 
 export const RecuperarSenha = () => {
     const [erros, setErros] = useState();
@@ -82,7 +86,7 @@ export const RecuperarSenha = () => {
                 <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
                 <div className="footer">
-                    <Link to="/">Voltar</Link>
+                    <Link to="/login">Voltar</Link>
                 </div>
             </form>
         </div>

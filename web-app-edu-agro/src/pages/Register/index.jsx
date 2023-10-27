@@ -9,13 +9,17 @@ import Snackbar from '@mui/material/Snackbar';
 import './style.css';
 
 function AuthPopup({ open, message, onClose }) {
+  const messageStyle = {
+    fontSize: '18px',
+  };
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={open}
       autoHideDuration={6000} // Define a duração que o pop-up ficará visível
       onClose={onClose}
-      message={message}
+      message={<span style={messageStyle}>{message}</span>}
     />
   );
 }
@@ -63,7 +67,9 @@ export const Register = () => {
   return (
     <div className="container">
       <header className="header">
-        <img src={logo} alt="Logo" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
         <span>Cadastro</span>
       </header>
 
@@ -119,7 +125,7 @@ export const Register = () => {
 
         <div className="footer">
           <p>Já tem uma conta? </p>
-          <Link to="/">Acesse sua conta aqui!</Link>
+          <Link className='footer_link' to="/login">Acesse sua conta aqui!</Link>
         </div>
       </form>
     </div>
