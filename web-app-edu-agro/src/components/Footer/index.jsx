@@ -2,6 +2,8 @@ import './style.css';
 
 export default function Footer() {
 	return (
-			<h1 className="title">Footer</h1>
+			<footer>
+			  &copy; 2023 EducationAgro - Todos os direitos reservados
+			</footer>
 	)
 }
