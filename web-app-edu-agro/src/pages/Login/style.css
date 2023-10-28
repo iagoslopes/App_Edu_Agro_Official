@@ -1,117 +1,134 @@
-.container {
-    width: 100vw;
-    height: 100vh;
+* {
+    font-family: 'poppins', sans-serif;
+}
 
+.section-login {
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
-}
-
-.container .header {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
-}
-
-.container .header span {
-    padding-top: 8px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.container form {
-    width: 60%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.container form .inputContainer {
-    display: flex;
-    width: 60%;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.container form .inputContainer label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    margin-bottom: 8px;
-}
-
-.container form .inputContainer #email,
-.container form .inputContainer #password {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 16px;
-
+    min-height: 100vh;
     width: 100%;
-    height: 49px;
-
-    border: 1px solid green;
-    border-radius: 12px;
-    margin-bottom: 12px;
+    
+    background:  url('background1.jpg')no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
-.container form a {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-
-    padding-top: 16px;
-    padding-bottom: 16px;
-    color: green;
-    justify-content: center;
-}
-
-.container form #button {
+.form-box {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+}
+
+.inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .3s ease-in-out;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+    top: -1px;
+}
+.floating.active {
+    top: -8px;
+  }
+
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
     border: none;
-
-    width: 60%;
-    height: 48px;
-
-    background: green;
-    border-radius: 12px;
-
-    font-size: 18px;
-    line-height: 22px;
+    outline: none;
+    font-size: 1em;
+    padding: 25px 5px 5px;
+    color: #fff;
 }
 
-.container form #button:hover {
-    cursor: pointer;
-    font-size: 25px;
+.inputbox .icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
 }
 
-.container form .footer {
+.forget {
+    margin: -15px 0 15px;
+    font-size: .9em;
+    color: #fff;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 1px;
+    justify-content: center;
 }
 
-.container form .footer p {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: black;
+.forget label input {
+    margin-right: 3px;
 }
 
-.container form .footer .footer_link {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    text-decoration-line: underline;
-    color: green;
+.forget label .forget-pass {
+    margin-left: 4em;
+    color: #fff;
+    text-decoration: none;
 }
+
+.forget label .forget-pass:hover {
+    text-decoration: underline;
+}
+
+.button-login {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.link {
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.link p .register-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.link p .register-link:hover {
+    text-decoration: underline;
+}
+
 
 .containter form .input-error {
     outline: 1px solid rgb(255, 72, 72);
@@ -123,23 +140,4 @@
     margin-bottom: 5px;
 }
 
-@media screen and (max-width: 768px) {
-    .container form .inputContainer {
-        width: 80%;
-    }
-
-    .container form #button {
-        width: 80%;
-    }
-
-    .container form .footer {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-    }
-    .container form .footer .footer_link {
-        line-height: 1px;
-        padding: 0;
-        margin-bottom: 10px;
-    }
-}
+@media screen and (max-width: 768px) {}
