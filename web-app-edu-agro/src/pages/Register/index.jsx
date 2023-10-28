@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { isEmail } from "validator";
 import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
+import { RiLockPasswordLine } from 'react-icons/ri';
+import { HiOutlineMail } from 'react-icons/hi';
 import './style.css';
 
 function AuthPopup({ open, message, onClose }) {
@@ -33,6 +35,7 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
     register,
+    watch,
   } = useForm();
 
   async function onSubmit(data) {
@@ -65,69 +68,65 @@ export const Register = () => {
   }
 
   return (
-    <div className="container">
-      <header className="header">
-        <Link to="/">
-          <img src={logo} alt="Logo" className="logo" />
-        </Link>
-        <span>Cadastro</span>
-      </header>
+    <div className="section-register">
+      <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
+      <div className="form-box">
+        <div className="form-value">
+          <form onSubmit={handleSubmit(onSubmit)}>
+          <Link to='/'><h2>Cadastro</h2></Link>
+            <div className="inputbox">
+              <div className="icon"><HiOutlineMail /></div>
+              <input
+                className={errors?.email && "input-error"}
+                id="email"
+                name="email"
+                type="email"
+                {...register("email", {
+                  required: true,
+                  validate: (value) => isEmail(value),
+                })}
+              ></input>
+              <label htmlFor="email"
+                className={`floating ${watch('email') ? 'active' : ''}`}>E-mail</label>
+              {errors?.email?.type === "required" && (
+                <p className="error-message">Email is required.</p>
+              )}
+              {errors?.email?.type === "validate" && (
+                <p className="error-message">Email is invalid.</p>
+              )}
+            </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="inputContainer">
-          <label htmlFor="email">E-mail</label>
-          <input
-            className={errors?.email && "input-error"}
-            id="email"
-            name="email"
-            type="email"
-            placeholder="example@email.com"
-            {...register("email", {
-              required: true,
-              validate: (value) => isEmail(value),
-            })}
-          />
-          {errors?.email?.type === "required" && (
-            <p className="error-message">Email is required.</p>
-          )}
+            <div className="inputbox">
+              <div className="icon"><RiLockPasswordLine /></div>
+              <input
+                className={errors?.password && "input-error"}
+                type="password"
+                id="password"
+                autoComplete='off'
+                {...register("password", { required: true, minLength: 6 })}
+              ></input>
+              <label htmlFor="password"
+                className={`floating ${watch('password') ? 'active' : ''}`}>Password</label>
+              {errors?.password?.type === "required" && (
+                <p className="error-message">Password is required.</p>
+              )}
+              {errors?.password?.type === "minLength" && (
+                <p className="error-message">
+                  Password needs to have at least 6 characters.
+                </p>
+              )}
+            </div>
 
-          {errors?.email?.type === "validate" && (
-            <p className="error-message">Email is invalid.</p>
-          )}
+            <button type="submit" className="button-register" id='button'>
+              Cadastrar
+            </button>
+
+            <div className="login-link">
+              <p>Já tem uma conta? <Link className='register-link' to="/login">Entre</Link></p>
+            </div>
+          </form>
         </div>
-
-        <div className="inputContainer">
-          <label htmlFor="password">Password</label>
-          <input
-            className={errors?.password && "input-error"}
-            type="password"
-            id="password"
-            placeholder="*********"
-            autoComplete='off'
-            {...register("password", { required: true, minLength: 6 })}
-          />
-          {errors?.password?.type === "required" && (
-            <p className="error-message">Password is required.</p>
-          )}
-
-          {errors?.password?.type === "minLength" && (
-            <p className="error-message">
-              Password needs to have at least 6 characters.
-            </p>
-          )}
-        </div>
-
-        <button type="submit" className="button" id='button'>
-          Cadastrar
-        </button>
-
-        <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
-
-        <div className="footer">
-          <p>Já tem uma conta? </p>
-          <Link className='footer_link' to="/login">Acesse sua conta aqui!</Link>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
