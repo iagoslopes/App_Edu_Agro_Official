@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
@@ -30,6 +30,8 @@ export const Login = () => {
   const navigate = useNavigate();
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  
   const user = auth.currentUser;
 
   const {
@@ -46,7 +48,13 @@ export const Login = () => {
       setErros('E-mail não foi verificado ainda.');
       setPopupOpen(true);
     } else {
-      await setPersistence(auth, browserLocalPersistence)
+      let persistenceType = browserLocalPersistence;
+
+      if (!rememberMe) {
+        persistenceType = browserSessionPersistence; // Se "manter a sessão ativa" não estiver marcado, use a sessão
+      }
+
+      await setPersistence(auth, persistenceType)
         .then(() => {
           // Realize o login após definir a persistência
           return signInWithEmailAndPassword(auth, data.email, data.password);
@@ -123,7 +131,7 @@ export const Login = () => {
             </div>
 
             <div className="forget">
-              <label htmlFor=""><input type="checkbox" />Remember me<Link className='forget-pass' to="/recuperarSenha">Esqueceu sua senha?</Link></label>
+              <label htmlFor=""><input type="checkbox" onChange={() => setRememberMe(!rememberMe)} />Remember me<Link className='forget-pass' to="/recuperarSenha">Esqueceu sua senha?</Link></label>
             </div>
 
             <button type="submit" className="button-login" id='button'>
