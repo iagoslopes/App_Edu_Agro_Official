@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import './style.css';
 
-export const Catalogo = () => {
+export const Solos = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
@@ -28,20 +28,9 @@ export const Catalogo = () => {
         <>
             <Header />
             <div className="catalogo-container">
-                Catálogo
-                <br/>
-                <Link to='/plantas'>
-                    Plantas
-                </Link>
-                <br/>
-                <Link to='/solos'>
-                    Solos
-                </Link>
-                <br/>
-                <Link to='/pragas'>
-                    Pragas
-                </Link>
+                Solos
             </div>
+
             <Footer />
         </>
     )
