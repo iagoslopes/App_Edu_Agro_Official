@@ -46,13 +46,13 @@ export default function Header() {
 
     return (
         <nav className="nav">
-            <Link to="/">
-                <img src={logo} alt="Logo" className="logo" />
+            <Link to="/" className="logo">
+                <img src={logo} alt="Logo" width={95} className="img"/>
             </Link>
             <Link to='/' className='nav_brand'>
                 EducationAgro
             </Link>
-            <div className="container">
+            <div className="container-header">
                 <ul className={active}>
                     <div className="item">
                         <li className="nav_item">
@@ -76,7 +76,7 @@ export default function Header() {
                             </Link>
                         </li>
                     </div>
-                    <div className="user_container">
+                    <div className="user_container2">
                         {user ? (
                             <div className='nav_user'>
                                 <div className="user">
@@ -95,9 +95,28 @@ export default function Header() {
                                 <Link className='botao_register' to="/register">Cadastre-se</Link>
                             </div>
                         )}
-
                     </div>
                 </ul>
+            </div>
+            <div className="user_container">
+                {user ? (
+                    <div className='nav_user'>
+                        <div className="user">
+                            <p>{user.email}</p>
+                            <button onClick={handleSignOut} className="sign_out">
+                                SignOut
+                            </button>
+                        </div>
+                        <div className="icon_user">
+                            <FaUser size={32} />
+                        </div>
+                    </div>
+                ) : (
+                    <div className='btn_not_user'>
+                        <Link className='botao_login' to="/login">Login</Link>
+                        <Link className='botao_register' to="/register">Cadastre-se</Link>
+                    </div>
+                )}
             </div>
             <div onClick={navToggle} className={toggleIcon}>
                 <div className="line1"></div>

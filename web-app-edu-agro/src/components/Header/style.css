@@ -12,12 +12,13 @@ li {
 
 a {
     text-decoration: none;
-    color: darkgray;
+    color: black;
 }
 
 .nav {
     display: flex;
     align-items: center;
+    width: 100%;
     height: 8vh;
     background: rgb(190, 255, 190);
 }
@@ -31,28 +32,29 @@ a {
     align-items: center;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 1%;
-    width: 100px;
+    margin-left: 3%;
 }
 
-.container {
+.container-header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 80%;
+    justify-content: center;
+    width: 100%;
 }
 
 .nav_menu {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    gap: 70%;
+}
+
+.item a:hover {
+    color: darkgreen;
 }
 
 .item {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     gap: 3rem;
 }
 
@@ -60,6 +62,7 @@ a {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-right: 3%;
 }
 
 .nav_user {
@@ -103,7 +106,11 @@ a {
     display: none;
 }
 
-@media screen and (max-width: 768px) {
+.user_container2 {
+    display: none;
+}
+
+@media screen and (max-width: 912px) {
     .nav_toggler {
         display: block;
     }
@@ -113,12 +120,13 @@ a {
         color: black;
     }
 
-    .logo {
-        width: 90px;
+    .img {
+        width: 80px;
     }
 
     .item {
         flex-direction: column;
+        margin-top: 15%;
     }
 
     .nav_menu {
@@ -126,12 +134,12 @@ a {
         top: 7vh;
         right: 0;
         width: 50%;
-        height: 93vh;
+        height: 100vh;
         background: rgb(190, 255, 190);
         flex-direction: column;
         transform: translateX(100%);
         transition: 0.5s ease-in;
-        gap: 30%;
+        gap: 25%;
     }
 
     .nav_user {
@@ -147,9 +155,10 @@ a {
         overflow-wrap: break-word;
     }
 
-    .user .sign_out {
-        width: 40vw;
-        height: 3vh;
+    .sign_out {
+        text-align: center;
+        width: 100px;
+        height: 4vh;
     }
 
     .btn_not_user {
@@ -157,6 +166,15 @@ a {
         align-items: center;
         justify-content: center;
         flex-direction: column;
+    }
+
+    .user_container {
+        display: none;
+    }
+
+    .user_container2 {
+        display: flex;
+        position: relative;
     }
 
 }
