@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { FaUser } from 'react-icons/fa';
 import logo from '../../assets/img_logo.png';
@@ -56,24 +56,24 @@ export default function Header() {
                 <ul className={active}>
                     <div className="item">
                         <li className="nav_item">
-                            <Link to='/' className="nav_link">
+                            <NavLink to='/' className="nav_link">
                                 Home
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav_item">
-                            <Link to='/catalogo' className="nav_link">
+                            <NavLink to='/catalogo' className="nav_link">
                                 Catálogo
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav_item">
-                            <Link to='/sobre' className="nav_link">
+                            <NavLink to='/sobre' className="nav_link">
                                 Sobre
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav_item">
-                            <Link to='/contato' className="nav_link">
+                            <NavLink to='/contato' className="nav_link">
                                 Contato
-                            </Link>
+                            </NavLink>
                         </li>
                     </div>
                     <div className="user_container2">
