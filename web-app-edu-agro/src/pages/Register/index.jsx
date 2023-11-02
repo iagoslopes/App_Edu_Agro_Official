@@ -81,6 +81,7 @@ export const Register = () => {
                 id="email"
                 name="email"
                 type="email"
+                autoComplete='off'
                 {...register("email", {
                   required: true,
                   validate: (value) => isEmail(value),

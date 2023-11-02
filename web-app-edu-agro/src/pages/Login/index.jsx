@@ -94,6 +94,7 @@ export const Login = () => {
                 id="email"
                 name="email"
                 type="email"
+                autoComplete='off'
                 {...register("email", {
                   required: true,
                   validate: (value) => isEmail(value),
