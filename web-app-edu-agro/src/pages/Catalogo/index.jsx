@@ -23,6 +23,8 @@ export const Catalogo = () => {
     const [showSearchPlantas, setShowSearchPlantas] = useState(false);
     const [showSearchTerrenos, setShowSearchTerrenos] = useState(false);
     const [showSearchPragas, setShowSearchPragas] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedRecord, setSelectedRecord] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -75,6 +77,16 @@ export const Catalogo = () => {
         setShowSearchPlantas(false);
         setShowSearchTerrenos(false);
         setShowSearchPragas(true);
+    };
+
+    const handleRecordClick = (record) => {
+        setSelectedRecord(record);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setSelectedRecord(null);
+        setShowModal(false);
     };
 
     useEffect(() => {
@@ -164,55 +176,49 @@ export const Catalogo = () => {
                             activeButton === "plantas" ? (
                                 // Renderize os registros de plantas aqui
                                 filteredPlantas.map((planta, index) => (
-                                    <div key={index} className='plantas-item'>
-                                        <Link to="/">
-                                            <div className='plantas'>
-                                                <img src={planta.foto} alt={planta.nome} className='foto' />
-                                                <div className='informacoes'>
-                                                    <span className='title'>{planta.nome}</span>
-                                                    <span className='subtitle'>{planta.nome_cientifico}</span>
-                                                </div>
-                                                <div className='visualizar'>
-                                                    Visualizar
-                                                </div>
+                                    <div key={index} className='registros-item'>
+                                        <div className='registros'>
+                                            <img src={planta.foto} alt={planta.nome} className='foto' />
+                                            <div className='informacoes'>
+                                                <span className='title'>{planta.nome}</span>
+                                                <span className='subtitle'>{planta.nome_cientifico}</span>
                                             </div>
-                                        </Link>
+                                            <button onClick={() => handleRecordClick(planta)} className='visualizar'>
+                                                Visualizar
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             ) : activeButton === "terrenos" ? (
                                 // Renderize os registros de terrenos aqui
                                 filteredTerrenos.map((terreno, index) => (
-                                    <div key={index} className='plantas-item'>
-                                        <Link to="/">
-                                            <div className='plantas'>
-                                                <img src={terreno.foto} alt={terreno.nome} className='foto' />
-                                                <div className='informacoes'>
-                                                    <span className='title'>{terreno.nome}</span>
-                                                    <span className='subtitle'>{terreno.nome_cientifico}</span>
-                                                </div>
-                                                <div className='visualizar'>
-                                                    Visualizar
-                                                </div>
+                                    <div key={index} className='registros-item'>
+                                        <div className='registros'>
+                                            <img src={terreno.foto} alt={terreno.nome} className='foto' />
+                                            <div className='informacoes'>
+                                                <span className='title'>{terreno.nome}</span>
+                                                <span className='subtitle'>{terreno.nome_cientifico}</span>
                                             </div>
-                                        </Link>
+                                            <button onClick={() => handleRecordClick(terreno)} className='visualizar'>
+                                                Visualizar
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             ) : activeButton === "pragas" ? (
                                 // Renderize os registros de pragas aqui
                                 filteredPragas.map((praga, index) => (
-                                    <div key={index} className='plantas-item'>
-                                        <Link to="/">
-                                            <div className='plantas'>
-                                                <img src={praga.foto} alt={praga.nome} className='foto' />
-                                                <div className='informacoes'>
-                                                    <span className='title'>{praga.nome}</span>
-                                                    <span className='subtitle'>{praga.nome_cientifico}</span>
-                                                </div>
-                                                <div className='visualizar'>
-                                                    Visualizar
-                                                </div>
+                                    <div key={index} className='registros-item'>
+                                        <div className='registros'>
+                                            <img src={praga.foto} alt={praga.nome} className='foto' />
+                                            <div className='informacoes'>
+                                                <span className='title'>{praga.nome}</span>
+                                                <span className='subtitle'>{praga.nome_cientifico}</span>
                                             </div>
-                                        </Link>
+                                            <button onClick={() => handleRecordClick(praga)} className='visualizar'>
+                                                Visualizar
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             ) : null
@@ -222,6 +228,100 @@ export const Catalogo = () => {
                                 Clique em um dos botões acima para visualizar os registros.
                             </div>
                         )}
+
+                        {showModal && (
+                            <div className="modal">
+                                <div className="modal-content">
+                                    {selectedRecord && (
+                                        <div className='modal-container'>
+                                            <p className='title-modal'>Detalhes do Registro</p>
+                                            <div className='modal-imagem'>
+                                                <div className="imagem">
+                                                    <img src={selectedRecord.foto} alt={selectedRecord.nome} className='foto-modal' />
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <p className='p'>Nome: </p>
+                                                <div className='modal-campos'>
+                                                    <span>{selectedRecord.nome}</span>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <p className='p'>Nome Científico: </p>
+                                                <div className='modal-campos'>
+                                                    <span>{selectedRecord.nome_cientifico}</span>
+                                                </div>
+                                            </div>
+
+                                            {selectedRecord.tipo && (
+                                                <div>
+                                                    <p className='p'>Tipo: </p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.tipo}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {selectedRecord.terreno && (
+                                                <div>
+                                                    <p className='p'>Terreno: </p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.terreno}</span>
+                                                    </div>
+                                                </div>
+
+                                            )}
+                                            {selectedRecord.praga && (
+                                                <div>
+                                                    <p className='p'>Praga: </p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.praga}</span>
+                                                    </div>
+                                                </div>
+
+                                            )}
+                                            {selectedRecord.cultivo && (
+                                                <div>
+                                                    <p className='p'>Cultivo: </p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.cultivo}</span>
+                                                    </div>
+                                                </div>
+
+                                            )}
+                                            {selectedRecord.caracteristica && (
+                                                <div>
+                                                    <p className='p'>Característica:</p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.caracteristica}</span>
+                                                    </div>
+                                                </div>
+
+                                            )}
+                                            {selectedRecord.combate && (
+                                                <div>
+                                                    <p className='p'>Combate:</p>
+                                                    <div className='modal-campos'>
+                                                        <span>{selectedRecord.combate}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="descricao">
+                                                <p className='p'>Descrição: </p>
+                                                <div className="sub-descricao">
+                                                    <span>{selectedRecord.descricao}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className='modal-close'>
+                                        <button onClick={closeModal}>Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                     </div>
 
                 </div>
