@@ -1,3 +1,194 @@
-.contato-container {
+.section-cat {
+    position: relative;
+    display: flex;
+    align-items: center;
     height: 92vh;
+    font-family: 'Open Sans',sans-serif;
+    color: #111111;
+    background-color: #e5e5e5;
 }
+
+.container-form {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 45%;
+    width: 47%;
+    height: 60vh;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #999999;;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.section-cat .contato-container {
+    background: darkgreen;
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+}
+
+.cont-form {
+    text-align: start;
+    width: 80%;
+}
+
+.cat-form {
+    margin: 20px 1px 0 0;
+}
+
+.cont-form h2 {
+    text-transform: uppercase;
+    font-family: 'poppins', sans-serif;
+    color: black;
+    font-size: 4rem;
+    font-weight: 400;
+    margin: 28px 0 0 10px;
+    padding: 0;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.cat-form input,
+.cat-form textarea {
+    display: block;
+    padding: 10px 12px;
+    background-image: none;
+    background-clip: padding-box;
+    width: 100%;
+    height: auto;
+    margin-bottom: 28px;
+    padding-left: 28px;
+    text-align: start;
+    border: none;
+    border-bottom: 2px solid black;
+    border-width: 2px;
+    
+}
+
+.cat-form textarea {
+    height: 15rem;
+    min-width: 100%;
+    min-height: 5rem;
+    max-width: 100%;
+    max-height: 25rem;
+}
+
+.cat-btn {
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container-infos {
+    position: absolute;
+    width: 25%;
+    padding: 20px;
+    background-color: transparent;
+    z-index: 1;
+    left: 10%;
+}
+.cont-telefone, .cont-email {
+    padding: 20px 30px 15px;
+    max-width: 100%;
+    color: #ffffff;
+}
+
+.title-tel, .title-email {
+    font-weight: bold;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 1px 0 30px;
+    font-size: 2rem;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.tel,
+.desc-email {
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    position: relative;
+    margin: 20px 1px 0;
+}
+
+@media screen and (max-width: 912px) {
+    .section-cat {
+        height: 120vh;
+    }
+
+    .section-cat .contato-container {
+        position: absolute;
+        margin-top: 119px;
+        margin-left: 0;
+        margin-bottom: 0;
+        width: 75%;
+        height: 98vh;
+    }
+
+    .section-cat .container-form {
+        position: absolute;
+        top: 0;
+        left: 15%;
+        margin-top: 10%;
+        width: calc(((100% - 720px) / 2) + 484px);
+        height: auto;
+        background-color: #fff;
+        border: 1px solid #999999;;
+        box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
+        z-index: 1;
+    }
+
+    .container-infos {
+        position: absolute;
+        width: 80%;
+        padding: 20px;
+        background-color: transparent;
+        z-index: 1;
+        left: 0;
+        bottom: 15%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .section-cat {
+        height: 130vh;
+    }
+
+    .section-cat .contato-container {
+        position: absolute;
+        margin-top: 119px;
+        margin-left: 0;
+        margin-bottom: 0;
+        width: 75%;
+        height: 112vh;
+    }
+
+    .section-cat .container-form {
+        position: absolute;
+        top: 0;
+        margin-top: 10%;
+        left: 15%;
+        width: calc(((100% - 400px) / 2) + 313px);
+        height: auto;
+        background-color: #fff;
+        border: 1px solid #999999;;
+        box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
+        z-index: 1;
+    }
+
+    .container-infos {
+        position: absolute;
+        width: 80%;
+        padding: 20px;
+        background-color: transparent;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+    }
+}
+
