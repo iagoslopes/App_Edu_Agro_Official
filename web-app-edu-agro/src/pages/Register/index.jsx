@@ -46,7 +46,7 @@ export const Register = () => {
       .then(() => {
         sendEmailVerification(auth.currentUser)
           .then(() => {
-            setErros('Usuário criado com sucesso. Verifique o seu e-mail');
+            setErros('Cadastrado. Verifique seu e-mail, na sua caixa de spam ou lixo eletrônico');
             setPopupOpen(true);
           });
       })
@@ -57,7 +57,7 @@ export const Register = () => {
           setPopupOpen(true);
         } else {
           // Outros erros
-          setError('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
+          setErros('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
           setPopupOpen(true);
         }
 
@@ -71,17 +71,24 @@ export const Register = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
-        navigate('/');
-        return null;
+        // Verifique se o usuário foi recém-registrado
+        if (currentUser.emailVerified) {
+          // O usuário está registrado e verificou o e-mail, então vá para a página inicial
+          navigate('/');
+        } else {
+          // O usuário ainda não verificou o e-mail, você pode mostrar uma mensagem para verificar o e-mail ou redirecionar para uma página de verificação de e-mail
+          // Neste exemplo, redirecionamos para uma página de verificação de e-mail
+        }
       } else {
         setUsers(null);
       }
     });
-
+  
     return () => {
       unsubscribe();
     };
   }, []);
+  
 
   return (
     <div className="section-register">

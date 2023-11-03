@@ -84,13 +84,19 @@ export const Login = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
-        navigate('/');
-        return null;
+        // Verifique se o usuário foi recém-registrado
+        if (currentUser.emailVerified) {
+          // O usuário está registrado e verificou o e-mail, então vá para a página inicial
+          navigate('/');
+        } else {
+          // O usuário ainda não verificou o e-mail, você pode mostrar uma mensagem para verificar o e-mail ou redirecionar para uma página de verificação de e-mail
+          // Neste exemplo, redirecionamos para uma página de verificação de e-mail
+        }
       } else {
         setUsers(null);
       }
     });
-
+  
     return () => {
       unsubscribe();
     };
