@@ -23,6 +23,7 @@ a {
     background: rgb(190, 255, 190);
     position: sticky;
     top: 0;
+    z-index: 9999;
 }
 
 .nav_item .active {

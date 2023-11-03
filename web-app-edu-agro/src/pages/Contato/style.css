@@ -86,7 +86,7 @@
 
 .container-infos {
     position: absolute;
-    width: 25%;
+    width: 300px;
     padding: 20px;
     background-color: transparent;
     z-index: 1;
@@ -118,16 +118,15 @@
 
 @media screen and (max-width: 912px) {
     .section-cat {
-        height: 120vh;
+        height: 1000px;
     }
 
     .section-cat .contato-container {
         position: absolute;
-        margin-top: 119px;
+        top: 150px;
         margin-left: 0;
-        margin-bottom: 0;
         width: 75%;
-        height: 98vh;
+        height: 750px;
     }
 
     .section-cat .container-form {
@@ -135,7 +134,7 @@
         top: 0;
         left: 15%;
         margin-top: 10%;
-        width: calc(((100% - 720px) / 2) + 484px);
+        width: calc(((100% - 670px) / 2) + 484px);
         height: auto;
         background-color: #fff;
         border: 1px solid #999999;;
@@ -150,22 +149,21 @@
         background-color: transparent;
         z-index: 1;
         left: 0;
-        bottom: 15%;
+        bottom: 100px;
     }
 }
 
 @media screen and (max-width: 450px) {
     .section-cat {
-        height: 130vh;
+        height: 1000px;
     }
 
     .section-cat .contato-container {
         position: absolute;
-        margin-top: 119px;
+        top: 130px;
         margin-left: 0;
-        margin-bottom: 0;
         width: 75%;
-        height: 112vh;
+        height: 800px;
     }
 
     .section-cat .container-form {
@@ -188,7 +186,7 @@
         background-color: transparent;
         z-index: 1;
         left: 0;
-        bottom: 0;
+        bottom: 50px;
     }
 }
 
