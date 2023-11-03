@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
@@ -28,6 +28,7 @@ function AuthPopup({ open, message, onClose }) {
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [users, setUsers] = useState(null);
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -67,13 +68,28 @@ export const Register = () => {
     setPopupOpen(false);
   }
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        navigate('/');
+        return null;
+      } else {
+        setUsers(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <div className="section-register">
       <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
       <div className="form-box">
         <div className="form-value">
           <form onSubmit={handleSubmit(onSubmit)}>
-          <Link to='/'><h2>Cadastro</h2></Link>
+            <Link to='/'><h2>Cadastro</h2></Link>
             <div className="inputbox">
               <div className="icon"><HiOutlineMail /></div>
               <input

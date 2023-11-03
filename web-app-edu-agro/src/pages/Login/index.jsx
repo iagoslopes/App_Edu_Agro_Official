@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
@@ -28,10 +28,11 @@ function AuthPopup({ open, message, onClose }) {
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [users, setUsers] = useState(null);
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  
+
   const user = auth.currentUser;
 
   const {
@@ -79,6 +80,21 @@ export const Login = () => {
   const handleClosePopup = () => {
     setPopupOpen(false);
   }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        navigate('/');
+        return null;
+      } else {
+        setUsers(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="section-login">

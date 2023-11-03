@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../../components/Header";
 import Footer from '../../components/Footer';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { fetchPlantasData } from '../../api/plantas';
 import { fetchTerrenosData } from '../../api/terrenos';
