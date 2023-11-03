@@ -32,11 +32,15 @@ export default function Header() {
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-            if (currentUser.emailVerified) {
-                setUser(currentUser);
-            } else {
+            if (currentUser) {
+                if (currentUser.emailVerified) {
+                  setUser(currentUser);
+                } else {
+                    setUser(null);
+                }
+              } else {
                 setUser(null);
-            }
+              }
         });
 
         return () => {
