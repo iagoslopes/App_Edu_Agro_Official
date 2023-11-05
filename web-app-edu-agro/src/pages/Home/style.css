@@ -1,33 +1,154 @@
+.body, html {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.parallax {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+#text {
+  position: absolute;
+  font-size: 4em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+}
+
+.parallax img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+.sec {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: #003329;
+}
+
 .home-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.celular {
+  display: flex;
+  position: absolute;
+  z-index: 22;
+  left: 50%;
+  bottom: 0;
+}
+
+#celular {
+  width: 500px;
+}
+
+.app-info {
+  position: absolute;
+  flex: 1;
+  text-align: center;
+  z-index: 44;
+  left: 10%;
+  top: 35%;
+  word-wrap: break-word;
+  width: 45%;
+}
+
+.app-info h1 {
+  font-size: 4rem;
+  color: white;
+}
+
+.app-info p {
+  font-size: 2rem;
+  color: white;
+  margin: 20px 0;
+}
+
+.app-info a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.icon_user {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  gap: 10px;
+}
+
+@media screen and (max-width: 912px) {
+  .sec {
+    width: 100vw;
+    height: 100vh;
+  }
+  .home-container .app-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    height: 92vh;
+    flex-direction: column;
+    width: 95%;
+    top: 10%;
+    left: 0;
   }
-  .app-info {
-    flex: 1;
-    text-align: center;
+  .celular {
+    left: 30%;
   }
-  
-  .app-info h1 {
-    font-size: 2rem;
-    color: green; /* Cor do texto */
+  #celular {
+    width: 400px;
   }
-  
-  .app-info p {
-    font-size: 1.2rem;
-    color: darkgreen; /* Cor do texto */
-    margin: 20px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .sec {
+    width: 100vw;
+    height: 100vh;
   }
-  
-  .app-info a {
-    display: inline-block;
-    text-decoration: none;
+  .home-container .app-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    top: 10%;
+    left: 0;
   }
-  
-  .app-info img {
-    width: 150px;
-    height: 50px;
-    /* Adicione estilos para o ícone da Play Store */
+  .celular {
+    left: 15%;
   }
+  #celular {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .sec {
+    width: 100vw;
+    height: 100vh;
+  }
+  .home-container .app-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    top: 10%;
+    left: 0;
+  }
+  .celular {
+    left: 20%;
+  }
+  #celular {
+    width: 280px;
+  }
+}

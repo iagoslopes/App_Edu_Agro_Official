@@ -10,15 +10,16 @@ html, body {
 }
 ::-webkit-scrollbar {
     width: 10px; /* Largura da barra de rolagem */
+    background: #333;
   }
   
   /* Estilização do "polegar" da barra de rolagem */
   ::-webkit-scrollbar-thumb {
-    background: #888; /* Cor de fundo do polegar */
+    background: #999; /* Cor de fundo do polegar */
     border-radius: 5px; /* Raio das bordas do polegar */
   }
   
   /* Estilização quando o usuário passa o mouse sobre o polegar */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Cor de fundo do polegar ao passar o mouse */
+    background: #888; /* Cor de fundo do polegar ao passar o mouse */
   }
