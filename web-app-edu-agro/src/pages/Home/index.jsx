@@ -32,22 +32,22 @@ export const Home = () => {
 
             <section className='parallax'>
                 <img src={hill01} id='hill1'
-                    style={{ transform: `translateY(${offsetY * 0.5}px)` }}
+                    style={{ transform: `translateY(${offsetY * 0.25}px)` }}
                 />
                 <img src={hill02} id='hill2' />
                 <img src={hill03} id='hill3' />
                 <img src={hill04} id='hill4'
-                    style={{ transform: `translateX(${offsetY * -0.5}px)` }}
+                    style={{ transform: `translateY(${offsetY * 0.15}px)` }}
                 />
                 <img src={hill05} id='hill5'
-                    style={{ transform: `translateX(${offsetY * 0.5}px)` }}
+                    style={{ transform: `translateY(${offsetY * 0.35}px)` }}
                 />
                 <img src={tree0} id='tree' />
                 <h2 id='text'
                     style={{ transform: `translateY(${offsetY * 0.5}px)` }}
                 >Education Agro</h2>
                 <img src={leaf0} id='leaf'
-                    style={{ transform: `translateY(${offsetY * -1.5}px) translateX(${offsetY * 0.5}px)` }}
+                    style={{ transform: `translateY(${offsetY * -1}px)` }}
                 />
                 <img src={plant0} id='plant' />
             </section>
