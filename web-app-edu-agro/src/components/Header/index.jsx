@@ -34,13 +34,13 @@ export default function Header() {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             if (currentUser) {
                 if (currentUser.emailVerified) {
-                  setUser(currentUser);
+                    setUser(currentUser);
                 } else {
                     setUser(null);
                 }
-              } else {
+            } else {
                 setUser(null);
-              }
+            }
         });
 
         return () => {
@@ -51,7 +51,7 @@ export default function Header() {
     return (
         <nav className="nav">
             <Link to="/" className="logo">
-                <img src={logo} alt="Logo" width={95} className="img"/>
+                <img src={logo} alt="Logo" width={95} className="img" />
             </Link>
             <Link to='/' className='nav_brand'>
                 EducationAgro
@@ -90,7 +90,7 @@ export default function Header() {
                                     </button>
                                 </div>
                                 <div className="icon_user">
-                                    <FaUser size={32} />
+                                    <Link to="/admin"><FaUser size={32} /></Link>
                                 </div>
                             </div>
                         ) : (
@@ -112,7 +112,7 @@ export default function Header() {
                             </button>
                         </div>
                         <div className="icon_user">
-                            <FaUser size={32} />
+                            <Link to="/admin"><FaUser size={32} /></Link>
                         </div>
                     </div>
                 ) : (

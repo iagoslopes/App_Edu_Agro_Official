@@ -7,6 +7,7 @@ import { RecuperarSenha } from '../pages/RecuperarSenha';
 import { Contato } from '../pages/Contato';
 import { Catalogo } from '../pages/Catalogo';
 import { Sobre } from '../pages/Sobre';
+import { Admin } from '../pages/Admin';
 
 export function AppRoutes() {
     return (
@@ -19,6 +20,7 @@ export function AppRoutes() {
                 <Route path="/contato"  element={<Contato />} />
                 <Route path="/catalogo"  element={<Catalogo />} />
                 <Route path="/sobre"  element={<Sobre />} />
+                <Route path="/admin"  element={<Admin />} />
             </Routes>
         </BrowserRouter>
     )

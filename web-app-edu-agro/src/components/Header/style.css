@@ -106,6 +106,14 @@ a {
     margin-right: 3%;
 }
 
+.icon_user {
+    cursor: pointer;
+}
+
+.icon_user a:hover {
+    color: #fff;
+}
+
 .nav_user {
     display: flex;
     align-items: center;
@@ -187,7 +195,7 @@ a {
         flex-direction: column;
         transform: translateX(100%);
         transition: 0.5s ease-in;
-        gap: 30%;
+        gap: 25%;
     }
 
     .nav_link {
