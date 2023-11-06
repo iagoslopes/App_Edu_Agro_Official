@@ -20,7 +20,6 @@ a {
     align-items: center;
     width: 100%;
     height: 8vh;
-    
     position: fixed;
     top: 0;
     left: 0;
@@ -37,6 +36,21 @@ a {
     background: rgba(0, 0, 0, .1);
     backdrop-filter: blur(50px);
     z-index: -1;
+}
+
+.nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent,rgba(0, 0, 0, .1), transparent);
+    transition: .5s;
+}
+
+.nav:hover::after {
+    left: 100%;
 }
 
 .nav_item .active {
