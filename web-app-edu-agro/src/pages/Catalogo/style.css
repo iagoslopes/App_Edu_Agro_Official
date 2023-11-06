@@ -115,14 +115,18 @@
     font-size: 1.5rem;
 }
 
-.registros .visualizar {
+.registros .visualizar,
+.registros .editar,
+.registros .excluir {
     width: 70%;
     border-radius: 20%;
     background-color: beige;
     margin-top: 5%;
 }
 
-.registros .visualizar:hover {
+.registros .visualizar:hover,
+.registros .editar:hover,
+.registros .excluir:hover {
     background-color: bisque;
 }
 

@@ -1,3 +1,96 @@
-.admin-container {
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.admin {
+    width: 100%;
     height: 100vh;
+    background: #555;
+}
+
+.nav-admin  {
+    width: 20vw;
+    height: 100vh;
+    background: #444;
+}
+
+.nav-admin-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20vw;
+    height: 10vh;
+    background-color: aliceblue;
+}
+
+
+
+
+.admin-container {
+    width: 70vw;
+    height: 90vh;
+    background: #333;
+    position: absolute;
+    top: 5vh;
+    right: 5vw;
+    border-radius: 5px;
+}
+
+.admin-container-control {
+    display: flex;
+    align-items: center;
+    width: 70vw;
+    height: 10vh;
+    top: 0;
+    left: 0;
+    background: #444;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.admin-container-control .admin-btn-crud {
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+    position: absolute;
+    left: 15%;
+}
+
+.admin-container-control button {
+    font-size: 1.2em;
+}
+
+.admin-container-control .admin-btn-crud button {
+    background: transparent;
+    color: black;
+}
+
+.admin-container-control .admin-btn-crud button:hover {
+    color: rgb(124, 124, 124);
+}
+
+.admin-container-control .admin-btn-criar {
+    position: absolute;
+    right: 15%;
+}
+
+.admin-container-control .admin-btn-criar button {
+    background: transparent;
+    color: black;
+}
+
+.admin-container-control .admin-btn-criar button:hover {
+    color: rgb(124, 124, 124);
+}
+
+.admin-container .admin-container-registros {
+    width: 70vw;
+    height: 80vh;
+    top: 10vh;
+    left: 0;
+    background: #777;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
