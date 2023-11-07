@@ -9,7 +9,8 @@ export const Sobre = () => {
         <>
             <Header />
             <div className="sobre-container">
-                Sobre
+                <p>Sobre</p>
+                <span>Ainda vai ter alguma coisa aqui!</span>
             </div>
             <Footer />
         </>
