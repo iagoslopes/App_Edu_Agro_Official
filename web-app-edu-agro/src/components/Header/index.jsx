@@ -26,10 +26,10 @@ export default function Header() {
         if (emails === 'admin' && senhas === 'admin') {
             // Redireciona para a página de admin
             navigate('/admin');
-          } else {
+        } else {
             // Lógica para lidar com credenciais incorretas, como exibir uma mensagem de erro
             // ou realizar outras ações necessárias
-          }
+        }
     };
 
     const navToggle = () => {
@@ -112,7 +112,7 @@ export default function Header() {
                                     </button>
                                 </div>
                                 <div className="icon_user">
-                                <Link onClick={openModal}><FaUser size={32} /></Link>
+                                    <Link onClick={openModal}><FaUser size={32} /></Link>
                                 </div>
                             </div>
                         ) : (
@@ -153,33 +153,33 @@ export default function Header() {
             {showModal && (
                 <div className="modal-admin">
                     <div className="modal-admin-content">
+                        <div className='modal-admin-close'>
+                            <button onClick={closeModal}>Fechar</button>
+                        </div>
                         <div className='modal-admin-container'>
                             <p className='title-modal-admin'>Painel Admin</p>
 
                             <div className='modal-admin-email'>
-                                <input 
+                                <input
                                     placeholder='E-mail'
                                     type="email"
                                     value={emails}
-                                    onChange={(e) => setEmails(e.target.value)} 
+                                    onChange={(e) => setEmails(e.target.value)}
                                 />
                             </div>
 
                             <div className='modal-admin-senha'>
-                                <input 
+                                <input
                                     placeholder='Senha'
                                     type="password"
                                     value={senhas}
-                                    onChange={(e) => setSenhas(e.target.value)} 
+                                    onChange={(e) => setSenhas(e.target.value)}
                                 />
                             </div>
 
                             <div className='modal-admin-entrar'>
                                 <button onClick={handleEntrar}>Entrar</button>
                             </div>
-                        </div>
-                        <div className='modal-admin-close'>
-                            <button onClick={closeModal}>Fechar</button>
                         </div>
                     </div>
                 </div>
