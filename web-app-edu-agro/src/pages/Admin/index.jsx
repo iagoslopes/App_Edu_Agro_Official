@@ -418,15 +418,17 @@ export const Admin = () => {
                     )}
                     {collectionType === 'plantas' && (
                       <div>
-                        <p className="p">Cultivo: </p>
-                        <div className="modal-campos">
-                          <input
-                            type="text"
-                            value={newRecord.cultivo || ''}
-                            onChange={(e) =>
-                              setNewRecord({ ...newRecord, cultivo: e.target.value })
-                            }
-                          />
+                        <p className='p'>Cultivo: </p>
+                        <div className='modal-campos'>
+                          <div className="sub-descricao">
+                            <textarea
+                              className='textarea'
+                              value={newRecord.cultivo || ''}
+                              onChange={(e) =>
+                                setNewRecord({ ...newRecord, cultivo: e.target.value })
+                              }
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -459,15 +461,17 @@ export const Admin = () => {
                       </div>
                     )}
                     <div>
-                      <p className="p">descricao: </p>
-                      <div className="modal-campos">
-                        <input
-                          type="text"
-                          value={newRecord.descricao || ''}
-                          onChange={(e) =>
-                            setNewRecord({ ...newRecord, descricao: e.target.value })
-                          }
-                        />
+                      <p className='p'>Descrição: </p>
+                      <div className='modal-campos'>
+                        <div className="sub-descricao">
+                          <textarea
+                            className='textarea'
+                            value={newRecord.descricao || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, descricao: e.target.value })
+                            }
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
                     <div className="modal-buttons">
@@ -484,6 +488,19 @@ export const Admin = () => {
                 <div className="modal-content">
                   {editedRecord && (
                     <div className="modal-container">
+                      <div>
+                        <p className='p'>Imagem: </p>
+                        <div className='modal-campos'>
+                          <input
+                            type="text"
+                            value={editedRecord.foto}
+                            onChange={(e) =>
+                              setEditedRecord({ ...editedRecord, foto: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+
                       <div>
                         <p className='p'>Nome: </p>
                         <div className='modal-campos'>
@@ -559,13 +576,15 @@ export const Admin = () => {
                         <div>
                           <p className='p'>Cultivo: </p>
                           <div className='modal-campos'>
-                            <input
-                              type="text"
-                              value={editedRecord.cultivo}
-                              onChange={(e) =>
-                                setEditedRecord({ ...editedRecord, cultivo: e.target.value })
-                              }
-                            />
+                            <div className="sub-descricao">
+                              <textarea
+                                className='textarea'
+                                value={editedRecord.cultivo}
+                                onChange={(e) =>
+                                  setEditedRecord({ ...editedRecord, cultivo: e.target.value })
+                                }
+                              ></textarea>
+                            </div>
                           </div>
                         </div>
 
@@ -599,16 +618,19 @@ export const Admin = () => {
                           </div>
                         </div>
                       )}
-                      <div className="descricao">
+
+                      <div>
                         <p className='p'>Descrição: </p>
-                        <div className="sub-descricao">
-                          <input
-                            type="text"
-                            value={editedRecord.descricao}
-                            onChange={(e) =>
-                              setEditedRecord({ ...editedRecord, descricao: e.target.value })
-                            }
-                          />
+                        <div className='modal-campos'>
+                          <div className="sub-descricao">
+                            <textarea
+                              className='textarea'
+                              value={editedRecord.descricao}
+                              onChange={(e) =>
+                                setEditedRecord({ ...editedRecord, descricao: e.target.value })
+                              }
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
 
@@ -713,10 +735,15 @@ export const Admin = () => {
                         <div>
                           <p className='p'>Cultivo: </p>
                           <div className='modal-campos'>
-                            <span>{selectedRecord.cultivo}</span>
+                            <div className="sub-descricao">
+                              <textarea
+                                className='textarea'
+                                value={selectedRecord.cultivo}
+                                readOnly={true}
+                              ></textarea>
+                            </div>
                           </div>
                         </div>
-
                       )}
                       {selectedRecord.caracteristica && (
                         <div>
@@ -735,10 +762,16 @@ export const Admin = () => {
                           </div>
                         </div>
                       )}
-                      <div className="descricao">
+                      <div>
                         <p className='p'>Descrição: </p>
-                        <div className="sub-descricao">
-                          <span>{selectedRecord.descricao}</span>
+                        <div className='modal-campos'>
+                          <div className="sub-descricao">
+                            <textarea
+                              className='textarea'
+                              value={selectedRecord.descricao}
+                              readOnly={true}
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -285,7 +285,13 @@ export const Catalogo = () => {
                                                 <div>
                                                     <p className='p'>Cultivo: </p>
                                                     <div className='modal-campos'>
-                                                        <span>{selectedRecord.cultivo}</span>
+                                                        <div className="sub-descricao">
+                                                            <textarea
+                                                                className='textarea'
+                                                                value={selectedRecord.cultivo}
+                                                                readOnly={true}
+                                                            ></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -310,7 +316,11 @@ export const Catalogo = () => {
                                             <div className="descricao">
                                                 <p className='p'>Descrição: </p>
                                                 <div className="sub-descricao">
-                                                    <span>{selectedRecord.descricao}</span>
+                                                    <textarea
+                                                        className='textarea'
+                                                        value={selectedRecord.descricao}
+                                                        readOnly={true}
+                                                    ></textarea>
                                                 </div>
                                             </div>
                                         </div>
