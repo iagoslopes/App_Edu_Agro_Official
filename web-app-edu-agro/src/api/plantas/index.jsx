@@ -30,5 +30,13 @@ const updatePlant = async (plantaId, updatedData) => {
   }
 };
 
+const createPlant = async (newData) => {
+  try {
+    const response = await axios.post(`https://education-agro.onrender.com/plantas`, newData);
+    console.log('Registro criado com sucesso:', response.data);
+  } catch (error) {
+    console.error('Erro ao criar registro:', error);
+  }
+};
 
-export {fetchPlantasData, deletePlanta, updatePlant};
+export {fetchPlantasData, deletePlanta, updatePlant, createPlant};

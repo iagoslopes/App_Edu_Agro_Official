@@ -30,4 +30,13 @@ const updateTerreno = async (terrenoId, updatedData) => {
   }
 };
 
-export {fetchTerrenosData, deleteTerreno, updateTerreno};
+const createTerreno = async (newData) => {
+  try {
+    const response = await axios.post(`https://education-agro.onrender.com/terrenos`, newData);
+    console.log('Registro de terreno criado com sucesso:', response.data);
+  } catch (error) {
+    console.error('Erro ao criar registro de terreno:', error);
+  }
+};
+
+export {fetchTerrenosData, deleteTerreno, updateTerreno, createTerreno};

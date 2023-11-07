@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../../services/firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchPlantasData, deletePlanta, updatePlant } from '../../api/plantas';
-import { fetchTerrenosData, deleteTerreno, updateTerreno } from '../../api/terrenos';
-import { fetchPragasData, deletePraga, updatePraga } from '../../api/pragas';
+import { fetchPlantasData, deletePlanta, updatePlant, createPlant } from '../../api/plantas';
+import { fetchTerrenosData, deleteTerreno, updateTerreno, createTerreno } from '../../api/terrenos';
+import { fetchPragasData, deletePraga, updatePraga, createPraga } from '../../api/pragas';
 import logo from '../../assets/img_logo.png';
 import './style.css';
 
@@ -25,9 +25,39 @@ export const Admin = () => {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [selectedAction, setSelectedAction] = useState('visualizar');
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   const [recordToDelete, setRecordToDelete] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedRecord, setEditedRecord] = useState(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newRecord, setNewRecord] = useState({});
+  const [collectionType, setCollectionType] = useState(null);
+
+  const handleOpenCreate = () => {
+    setOpenCreateModal(true);
+  };
+
+  const handleCreateClick = () => {
+    setOpenCreateModal(false);
+    setShowCreateModal(true);
+    setNewRecord({});
+  };
+
+  const handleCreateRecord = async () => {
+    try {
+      if (collectionType === 'plantas') {
+        await createPlant(newRecord);
+      } else if (collectionType === 'terrenos') {
+        await createTerreno(newRecord);
+      } else if (collectionType === 'pragas') {
+        await createPraga(newRecord);
+      }
+      fetchData();
+      setShowCreateModal(false);
+    } catch (error) {
+      console.error('Erro ao criar um novo registro:', error);
+    }
+  };
 
   const handleSaveEditedRecord = async () => {
     if (activeButton === 'plantas' && editedRecord) {
@@ -92,7 +122,7 @@ export const Admin = () => {
 
   useEffect(() => {
     if (confirDadosChegaram === false) {
-      fetchData(); // Chame a função assíncrona para buscar os dados
+      fetchData();
     }
   }, []);
 
@@ -136,14 +166,12 @@ export const Admin = () => {
     setSelectedRecord(record);
 
     if (selectedAction === 'excluir') {
-      // Se a ação for "Excluir", mostre o modal de confirmação de exclusão
       setRecordToDelete(record);
       setShowConfirmationModal(true);
     } else if (selectedAction === 'editar') {
       setEditedRecord(record);
       setShowEditModal(true);
     } else {
-      // Caso contrário, mostre o modal de visualização
       setShowModal(true);
     }
   };
@@ -217,7 +245,7 @@ export const Admin = () => {
             </button>
           </div>
           <div className="admin-btn-criar">
-            <button id='btn-criar'>
+            <button onClick={handleOpenCreate} id='btn-criar'>
               Criar
             </button>
           </div>
@@ -254,7 +282,6 @@ export const Admin = () => {
           <div className="container-items">
             {showRecords ? (
               activeButton === "plantas" ? (
-                // Renderize os registros de plantas aqui
                 filteredPlantas.map((planta, index) => (
                   <div key={index} className='registros-item'>
                     <div className='registros'>
@@ -270,7 +297,6 @@ export const Admin = () => {
                   </div>
                 ))
               ) : activeButton === "terrenos" ? (
-                // Renderize os registros de terrenos aqui
                 filteredTerrenos.map((terreno, index) => (
                   <div key={index} className='registros-item'>
                     <div className='registros'>
@@ -286,7 +312,6 @@ export const Admin = () => {
                   </div>
                 ))
               ) : activeButton === "pragas" ? (
-                // Renderize os registros de pragas aqui
                 filteredPragas.map((praga, index) => (
                   <div key={index} className='registros-item'>
                     <div className='registros'>
@@ -303,9 +328,154 @@ export const Admin = () => {
                 ))
               ) : null
             ) : (
-              // Renderize a mensagem inicial
               <div className="mensagem-inicial">
                 Clique em um dos botões acima para visualizar os registros.
+              </div>
+            )}
+
+            {showCreateModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <div className="modal-container">
+                    <p className="title-modal">Criar Novo Registro</p>
+                    <div>
+                      <p className="p">Imagem: </p>
+                      <div className="modal-campos">
+                        <input
+                          type="text"
+                          value={newRecord.foto || ''}
+                          onChange={(e) =>
+                            setNewRecord({ ...newRecord, foto: e.target.value })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="p">Nome: </p>
+                      <div className="modal-campos">
+                        <input
+                          type="text"
+                          value={newRecord.nome || ''}
+                          onChange={(e) =>
+                            setNewRecord({ ...newRecord, nome: e.target.value })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="p">nome_cientifico: </p>
+                      <div className="modal-campos">
+                        <input
+                          type="text"
+                          value={newRecord.nome_cientifico || ''}
+                          onChange={(e) =>
+                            setNewRecord({ ...newRecord, nome_cientifico: e.target.value })
+                          }
+                        />
+                      </div>
+                    </div>
+                    {collectionType === 'plantas' && (
+                      <div>
+                        <p className="p">Tipo: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.tipo || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, tipo: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {collectionType === 'plantas' && (
+                      <div>
+                        <p className="p">Terreno: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.terreno || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, terreno: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {collectionType === 'plantas' && (
+                      <div>
+                        <p className="p">Praga: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.praga || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, praga: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {collectionType === 'plantas' && (
+                      <div>
+                        <p className="p">Cultivo: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.cultivo || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, cultivo: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {collectionType === 'terrenos' && (
+                      <div>
+                        <p className="p">caracteristica: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.caracteristica || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, caracteristica: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {collectionType === 'pragas' && (
+                      <div>
+                        <p className="p">combate: </p>
+                        <div className="modal-campos">
+                          <input
+                            type="text"
+                            value={newRecord.combate || ''}
+                            onChange={(e) =>
+                              setNewRecord({ ...newRecord, combate: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <div>
+                      <p className="p">descricao: </p>
+                      <div className="modal-campos">
+                        <input
+                          type="text"
+                          value={newRecord.descricao || ''}
+                          onChange={(e) =>
+                            setNewRecord({ ...newRecord, descricao: e.target.value })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="modal-buttons">
+                      <button onClick={handleCreateRecord}>Criar Registro</button>
+                      <button onClick={() => setShowCreateModal(false)}>Cancelar</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -448,6 +618,28 @@ export const Admin = () => {
                       </div>
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+
+            {openCreateModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <p className='title-modal'>Selecione um dos registros para criar</p>
+                  <div>
+                    <button onClick={() => { setCollectionType('plantas'); handleCreateClick(); }}>
+                      Plantas
+                    </button>
+                    <button onClick={() => { setCollectionType('terrenos'); handleCreateClick(); }}>
+                      Terrenos
+                    </button>
+                    <button onClick={() => { setCollectionType('pragas'); handleCreateClick(); }}>
+                      Pragas
+                    </button>
+                  </div>
+                  <div className='modal-buttons'>
+                    <button onClick={() => setOpenCreateModal(false)}>Cancelar</button>
+                  </div>
                 </div>
               </div>
             )}

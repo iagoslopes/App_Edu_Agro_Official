@@ -30,4 +30,13 @@ const updatePraga = async (pragaId, updatedData) => {
   }
 };
 
-export {fetchPragasData, deletePraga, updatePraga};
+const createPraga = async (newData) => {
+  try {
+    const response = await axios.post(`https://education-agro.onrender.com/pragas`, newData);
+    console.log('Registro de praga criado com sucesso:', response.data);
+  } catch (error) {
+    console.error('Erro ao criar registro de praga:', error);
+  }
+};
+
+export {fetchPragasData, deletePraga, updatePraga, createPraga};
