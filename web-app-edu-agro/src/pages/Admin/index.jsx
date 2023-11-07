@@ -1,34 +1,11 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../../services/firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchPlantasData } from '../../api/plantas';
-import { fetchTerrenosData } from '../../api/terrenos';
-import { fetchPragasData } from '../../api/pragas';
+import { fetchPlantasData, deletePlanta, updatePlant } from '../../api/plantas';
+import { fetchTerrenosData, deleteTerreno, updateTerreno } from '../../api/terrenos';
+import { fetchPragasData, deletePraga, updatePraga } from '../../api/pragas';
 import logo from '../../assets/img_logo.png';
 import './style.css';
-
-async function deletePlanta(plantaId) {
-  try {
-    const response = await axios.delete(`https://education-agro.onrender.com/plantas/${plantaId}`);
-    console.log('Registro excluído com sucesso:', response.data);
-
-    // Atualize os dados, se necessário
-  } catch (error) {
-    console.error('Erro ao excluir registro:', error);
-  }
-}
-
-async function updatePlant(plantaId, updatedData) {
-  try {
-    const response = await axios.put(`https://education-agro.onrender.com/plantas/${plantaId}`, updatedData);
-    console.log('Registro atualizado com sucesso:', response.data);
-
-    // Atualize os dados, se necessário
-  } catch (error) {
-    console.error('Erro ao atualizar registro:', error);
-  }
-};
 
 export const Admin = () => {
   const navigate = useNavigate();
@@ -52,28 +29,42 @@ export const Admin = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedRecord, setEditedRecord] = useState(null);
 
-  const handleSaveEditedRecord = () => {
-    // Certifique-se de que editedRecord não seja nulo
-    if (editedRecord) {
-      // Execute a função para salvar as alterações no registro
-      updatePlant(editedRecord._id, editedRecord);
-
-      // Feche o modal de edição
+  const handleSaveEditedRecord = async () => {
+    if (activeButton === 'plantas' && editedRecord) {
+      await updatePlant(editedRecord._id, editedRecord);
+      fetchData();
       setShowEditModal(false);
+    } else if (activeButton === 'terrenos' && editedRecord) {
+      await updateTerreno(editedRecord._id, editedRecord);
+      fetchData();
+      setShowEditModal(false);
+    } else if (activeButton === 'pragas' && editedRecord) {
+      await updatePraga(editedRecord._id, editedRecord);
+      fetchData();
+      setShowEditModal(false);
+    } else {
+
     }
   };
 
-  const handleDeleteConfirmation = () => {
-    // Certifique-se de que recordToDelete não seja nulo
-    if (recordToDelete) {
-      // Execute a função para excluir o registro
-      deletePlanta(recordToDelete._id);
-
-      // Feche o modal de confirmação
+  const handleDeleteConfirmation = async () => {
+    if (activeButton === 'plantas' && recordToDelete) {
+      await deletePlanta(recordToDelete._id);
+      fetchData();
       setShowConfirmationModal(false);
-
-      // Limpe o registroToDelete
       setRecordToDelete(null);
+    } else if (activeButton === 'terrenos' && recordToDelete) {
+      await deleteTerreno(recordToDelete._id);
+      fetchData();
+      setShowConfirmationModal(false);
+      setRecordToDelete(null);
+    } else if (activeButton === 'pragas' && recordToDelete) {
+      await deletePraga(recordToDelete._id);
+      fetchData();
+      setShowConfirmationModal(false);
+      setRecordToDelete(null);
+    } else {
+
     }
   };
 
@@ -98,6 +89,12 @@ export const Admin = () => {
       console.error("Erro ao buscar dados:", error);
     }
   };
+
+  useEffect(() => {
+    if (confirDadosChegaram === false) {
+      fetchData(); // Chame a função assíncrona para buscar os dados
+    }
+  }, []);
 
   const filteredPlantas = plantas.filter((planta) =>
     planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase())
@@ -157,12 +154,6 @@ export const Admin = () => {
   };
 
   useEffect(() => {
-    if (confirDadosChegaram === false) {
-      fetchData(); // Chame a função assíncrona para buscar os dados
-    }
-  }, []);
-
-  useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
         if (currentUser.emailVerified) {
@@ -178,7 +169,6 @@ export const Admin = () => {
       unsubscribe();
     };
   }, []);
-
 
   return (
     <div className="admin">

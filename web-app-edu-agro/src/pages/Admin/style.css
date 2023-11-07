@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
 }
@@ -9,7 +10,7 @@ body, html {
     background: #555;
 }
 
-.nav-admin  {
+.nav-admin {
     width: 20vw;
     height: 100vh;
     background: #444;
@@ -23,9 +24,6 @@ body, html {
     height: 10vh;
     background-color: aliceblue;
 }
-
-
-
 
 .admin-container {
     width: 70vw;
@@ -84,12 +82,17 @@ body, html {
     color: rgb(124, 124, 124);
 }
 
-.admin-container .admin-container-registros {
+.admin-container .admin-container-registros,
+.admin-container .container-items {
     width: 70vw;
-    height: 80vh;
+    height: 77vh;
     top: 10vh;
     left: 0;
     background: #777;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.admin-container .container-items {
+    overflow-y: auto;
 }
