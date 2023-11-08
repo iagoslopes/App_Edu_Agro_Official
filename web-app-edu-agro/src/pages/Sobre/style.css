@@ -1,15 +1,138 @@
 .sobre-container {
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background: #dddddd;
+}
+
+.missao-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 46vh;
+    margin-top: 8vh;
+}
+
+.missao-imagem {
+    width: 250px;
+    height: 40vh;
+    margin-right: 50vw;
+    background-image: url('Imagens/professora.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.missao {
+    position: absolute;
+    width: 50%;
+    right: 0;
+    text-align: center;
+}
+
+.missao-container .missao p {
+    font-size: 2em;
+}
+
+.missao-container .missao span {
+    font-size: 1.2em;
+}
+
+.espaco {
+    width: 100%;
+    height: 15vh;
+}
+
+.historia-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 46vh;
+}
+
+.historia-imagem {
+    width: 400px;
+    height: 40vh;
+    margin-left: 50vw;
+    background-image: url('Imagens/horta2.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.historia {
+    position: absolute;
+    width: 50%;
+    left: 0;
+    text-align: center;
+}
+
+.historia-container .historia p {
+    font-size: 2em;
+}
+
+.historia-container .historia span {
+    font-size: 1.3em;
+}
+
+.feedback-container {
+    width: 90%;
+    min-height: 25vh;
+    margin-bottom: 2vh;
+}
+
+.container-feed {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 25vh;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
+    background: transparent;
 }
 
-.sobre-container p {
-    font-size: 4em;
+.feedback-container h3 {
+    font-size: 3em;
 }
 
-.sobre-container span {
-    font-size: 2em;
+.feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 75%;
+}
+
+.feedback-container .feedback span {
+    font-size: 1.2em;
+}
+
+.feedback-button {
+    display: flex;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback-button a {
+    width: 100px;
+    font-size: 1.3em;
+    border-radius: 3px;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-button a:hover {
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
 }
