@@ -11,18 +11,40 @@ html {
 }
 
 .nav-admin {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 20vw;
     height: 100vh;
     background: #444;
+    gap: 10%;
 }
 
 .nav-admin-logo {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 20vw;
     height: 10vh;
-    background-color: aliceblue;
+    top: 0;
+    background-color: #333;
+}
+
+.nav-admin-logo img {
+    width: 100px;
+}
+
+.nav-admin-container ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.nav-admin-container ul li .active-button {
+    color: #111;
+    padding: 5px;
+    background: #fff;
+    border-radius: 5px;
 }
 
 .admin-container {
@@ -93,6 +115,37 @@ html {
     border-bottom-right-radius: 5px;
 }
 
+.admin-container-registros .search {
+    background-color: #999;
+}
+
 .admin-container .container-items {
     overflow-y: auto;
+}
+
+@media screen and (max-width: 912px) {
+    .nav-admin-logo img {
+        width: 76px;
+    }
+
+    .admin-container .admin-container-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .admin-container-control .admin-btn-crud {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        left: 0;
+        gap: 0;
+    }
+
+    .admin-container-control .admin-btn-criar {
+        display: flex;
+        position: relative;
+        right: 0;
+    }
 }

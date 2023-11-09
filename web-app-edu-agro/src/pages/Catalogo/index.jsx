@@ -225,7 +225,7 @@ export const Catalogo = () => {
                         ) : (
                             // Renderize a mensagem inicial
                             <div className="mensagem-inicial">
-                                Clique em um dos botões acima para visualizar os registros.
+                                Clique em um dos botões ao lado para visualizar os registros.
                             </div>
                         )}
 

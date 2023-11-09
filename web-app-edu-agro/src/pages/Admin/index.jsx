@@ -204,7 +204,6 @@ export const Admin = () => {
         <div className="nav-admin-logo">
           <Link to="/" className="logo">
             <img src={logo} alt="Logo" width={100} className="img" />
-            <p>EducationAgro</p>
           </Link>
         </div>
         <div className="nav-admin-container">
@@ -329,7 +328,7 @@ export const Admin = () => {
               ) : null
             ) : (
               <div className="mensagem-inicial">
-                Clique em um dos botões acima para visualizar os registros.
+                Clique em um dos botões ao lado para visualizar os registros.
               </div>
             )}
 
