@@ -90,7 +90,7 @@ a {
 }
 
 .item a:hover {
-    color: darkgreen;
+    color: rgb(107, 107, 107);
 }
 
 .item {
@@ -137,6 +137,10 @@ a {
     color: black;
 }
 
+.btn_not_user .botao_login:hover {
+    color: rgb(255, 215, 215);
+}
+
 .btn_not_user .botao_register {
     border: 1px solid black;
     border-radius: 5px;
@@ -144,6 +148,11 @@ a {
     margin: 0 10px;
     text-decoration: none;
     color: black;
+}
+
+.btn_not_user .botao_register:hover {
+    border: 1px solid rgb(255, 215, 215);
+    color: rgb(255, 215, 215);
 }
 
 .nav_toggler div {
