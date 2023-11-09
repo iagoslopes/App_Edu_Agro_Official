@@ -16,8 +16,8 @@
 
 .form-box {
     position: relative;
-    width: 400px;
-    height: 450px;
+    width: 350px;
+    height: 400px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
@@ -130,8 +130,6 @@ input:valid~label {
     text-decoration: underline;
 }
 
-
-
 .containter form .input-error {
     outline: 1px solid rgb(255, 72, 72);
 }
@@ -140,14 +138,4 @@ input:valid~label {
     color: rgb(255, 72, 72);
     font-size: 0.75rem;
     margin-bottom: 5px;
-}
-
-@media screen and (max-width: 768px) {
-    .container form .inputContainer {
-        width: 80%;
-    }
-
-    .container form #button {
-        width: 80%;
-    }
 }

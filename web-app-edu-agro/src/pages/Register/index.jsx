@@ -83,12 +83,12 @@ export const Register = () => {
         setUsers(null);
       }
     });
-  
+
     return () => {
       unsubscribe();
     };
   }, []);
-  
+
 
   return (
     <div className="section-register">
@@ -113,10 +113,10 @@ export const Register = () => {
               <label htmlFor="email"
                 className={`floating ${watch('email') ? 'active' : ''}`}>E-mail</label>
               {errors?.email?.type === "required" && (
-                <p className="error-message">Email is required.</p>
+                <p className="error-message">E-mail é obrigatório.</p>
               )}
               {errors?.email?.type === "validate" && (
-                <p className="error-message">Email is invalid.</p>
+                <p className="error-message">E-mail não é válido.</p>
               )}
             </div>
 
@@ -132,11 +132,11 @@ export const Register = () => {
               <label htmlFor="password"
                 className={`floating ${watch('password') ? 'active' : ''}`}>Password</label>
               {errors?.password?.type === "required" && (
-                <p className="error-message">Password is required.</p>
+                <p className="error-message">Senha é obrigatório.</p>
               )}
               {errors?.password?.type === "minLength" && (
                 <p className="error-message">
-                  Password needs to have at least 6 characters.
+                  Senha precisa conter pelo menos 6 caractéres.
                 </p>
               )}
             </div>

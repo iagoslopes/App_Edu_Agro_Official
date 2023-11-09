@@ -14,10 +14,11 @@
     background-size: cover;
 }
 
-.form-box {
+.section-login .form-box {
     position: relative;
-    width: 400px;
-    height: 450px;
+    width: 350px;
+    height: 440px;
+    padding-top: 25px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
@@ -25,6 +26,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.section-login .form-box .form-value {
+    width: 310px;
+    height: 450px;
 }
 
 .h2 {
@@ -84,19 +90,19 @@ input:valid ~ label {
     color: #fff;
     display: flex;
     justify-content: center;
+    gap: 30px;
 }
 
 .forget label input {
     margin-right: 3px;
 }
 
-.forget label .forget-pass {
-    margin-left: 4em;
+.forget .forget-pass {
     color: #fff;
     text-decoration: none;
 }
 
-.forget label .forget-pass:hover {
+.forget .forget-pass:hover {
     text-decoration: underline;
 }
 
@@ -129,7 +135,6 @@ input:valid ~ label {
     text-decoration: underline;
 }
 
-
 .containter form .input-error {
     outline: 1px solid rgb(255, 72, 72);
 }
@@ -139,5 +144,3 @@ input:valid ~ label {
     font-size: 0.75rem;
     margin-bottom: 5px;
 }
-
-@media screen and (max-width: 768px) {}
