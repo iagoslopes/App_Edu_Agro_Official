@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
 import { isEmail } from "validator";
-import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { HiOutlineMail } from 'react-icons/hi';
@@ -154,7 +153,7 @@ export const Login = () => {
             </div>
 
             <div className="forget">
-              <label htmlFor=""><input type="checkbox" onChange={() => setRememberMe(!rememberMe)} />Remember me</label>
+              <label htmlFor=""><input type="checkbox" onChange={() => setRememberMe(!rememberMe)} />Lembrar-me</label>
               <Link className='forget-pass' to="/recuperarSenha">Esqueceu sua senha?</Link>
             </div>
 
