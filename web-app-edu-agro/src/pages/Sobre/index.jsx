@@ -24,6 +24,8 @@ export const Sobre = () => {
                 </div>
                 <div className="espaco"></div>
                 <div className="historia-container">
+                    <div className="historia-imagem">
+                    </div>
                     <div className="historia">
                         <p>Nossa História</p>
                         <span>O Education Agro nasceu de um projeto interdisciplinar no intuito de elaborar um site e um 
@@ -31,8 +33,6 @@ export const Sobre = () => {
                             na agricultura, então nos surgiu uma ideia: desenvolver uma biblioteca pública e gratuita com 
                             todas as informações necessárias para cultivar as mais diversas flores, raízes, vegetais, legumes e mais.
                         </span>
-                    </div>
-                    <div className="historia-imagem">
                     </div>
                 </div>
                 <div className="espaco"></div>

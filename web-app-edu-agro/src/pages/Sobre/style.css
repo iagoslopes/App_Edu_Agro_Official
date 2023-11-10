@@ -136,3 +136,35 @@
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
 }
+
+@media screen and (max-width: 912px) {
+    .missao-container,
+    .historia-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        padding: 10px;
+    }
+
+    .missao,
+    .historia,
+    .missao-imagem,
+    .historia-imagem {
+        position: relative;
+        margin: 0;
+    }
+
+    .missao,
+    .historia {
+        width: 90vw;
+    }
+
+    .missao-imagem {
+        width: 175px;
+    }
+
+    .historia-imagem {
+        width: 300px;
+    }
+}

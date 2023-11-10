@@ -77,6 +77,11 @@ a {
     margin-left: 3%;
 }
 
+.logo img {
+    width: 90px;
+    height: 8vh;
+}
+
 .container-header {
     display: flex;
     align-items: center;
@@ -117,12 +122,28 @@ a {
 .nav_user {
     display: flex;
     align-items: center;
+    justify-content: center;
     justify-content: space-around;
     gap: 1rem;
 }
 
+.user_container .user {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+}
+
 .nav_user .user p {
     color: black;
+}
+
+.nav_user .user button {
+    border-radius: 5px;
+}
+
+.nav_user .user button:hover {
+    background: black;
+    color: #fff;
 }
 
 .btn_not_user {
@@ -181,10 +202,6 @@ a {
     .nav_brand {
         display: flex;
         color: black;
-    }
-
-    .img {
-        width: 6rem;
     }
 
     .item {
@@ -258,8 +275,8 @@ a {
         color: black;
     }
 
-    .img {
-        width: 6rem;
+    .logo img {
+        width: 70px;
     }
 
     .item {
@@ -333,8 +350,8 @@ a {
         color: black;
     }
 
-    .img {
-        width: 6rem;
+    .logo img {
+        width: 40px;
     }
 
     .item {
