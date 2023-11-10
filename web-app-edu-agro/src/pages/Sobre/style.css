@@ -30,7 +30,7 @@
 .missao {
     position: absolute;
     width: 50%;
-    right: 0;
+    right: 1%;
     text-align: center;
 }
 
@@ -69,7 +69,7 @@
 .historia {
     position: absolute;
     width: 50%;
-    left: 0;
+    left: 1%;
     text-align: center;
 }
 
