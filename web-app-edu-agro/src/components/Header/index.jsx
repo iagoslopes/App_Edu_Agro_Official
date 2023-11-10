@@ -1,35 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { FaUser } from 'react-icons/fa';
+import ConfiguracoesUsuario from '../User';
 import logo from '../../assets/img_logo.png';
 import './style.css';
 
 export default function Header() {
-    const navigate = useNavigate();
     const [active, setActive] = useState('nav_menu');
     const [toggleIcon, setToggleIcon] = useState('nav_toggler');
     const [user, setUser] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [emails, setEmails] = useState();
-    const [senhas, setSenhas] = useState();
+    const [showConfiguracoesModal, setShowConfiguracoesModal] = useState(false);
 
-    const openModal = () => {
-        setShowModal(true);
+    const openConfiguracoesModal = () => {
+        setShowConfiguracoesModal(true);
     };
 
-    const closeModal = () => {
-        setShowModal(false);
-    };
-
-    const handleEntrar = () => {
-        if (emails === 'admin' && senhas === 'admin') {
-            // Redireciona para a página de admin
-            navigate('/admin');
-        } else {
-            // Lógica para lidar com credenciais incorretas, como exibir uma mensagem de erro
-            // ou realizar outras ações necessárias
-        }
+    const closeConfiguracoesModal = () => {
+        setShowConfiguracoesModal(false);
     };
 
     const navToggle = () => {
@@ -112,7 +100,7 @@ export default function Header() {
                                     </button>
                                 </div>
                                 <div className="icon_user">
-                                    <Link onClick={openModal}><FaUser size={32} /></Link>
+                                    <Link onClick={openConfiguracoesModal}><FaUser size={32} /></Link>
                                 </div>
                             </div>
                         ) : (
@@ -134,7 +122,7 @@ export default function Header() {
                             </button>
                         </div>
                         <div className="icon_user">
-                            <Link onClick={openModal}><FaUser size={32} /></Link>
+                            <Link onClick={openConfiguracoesModal}><FaUser size={32} /></Link>
                         </div>
                     </div>
                 ) : (
@@ -150,39 +138,8 @@ export default function Header() {
                 <div className="line3"></div>
             </div>
 
-            {showModal && (
-                <div className="modal-admin">
-                    <div className="modal-admin-content">
-                        <div className='modal-admin-close'>
-                            <button onClick={closeModal}>Fechar</button>
-                        </div>
-                        <div className='modal-admin-container'>
-                            <p className='title-modal-admin'>Painel Admin</p>
-
-                            <div className='modal-admin-email'>
-                                <input
-                                    placeholder='E-mail'
-                                    type="email"
-                                    value={emails}
-                                    onChange={(e) => setEmails(e.target.value)}
-                                />
-                            </div>
-
-                            <div className='modal-admin-senha'>
-                                <input
-                                    placeholder='Senha'
-                                    type="password"
-                                    value={senhas}
-                                    onChange={(e) => setSenhas(e.target.value)}
-                                />
-                            </div>
-
-                            <div className='modal-admin-entrar'>
-                                <button onClick={handleEntrar}>Entrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {showConfiguracoesModal && user && user.email && (
+                <ConfiguracoesUsuario userEmail={user.email} onClose={closeConfiguracoesModal} />
             )}
 
         </nav>
