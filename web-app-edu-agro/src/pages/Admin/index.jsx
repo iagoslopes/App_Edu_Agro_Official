@@ -362,7 +362,7 @@ export const Admin = () => {
                       </div>
                     </div>
                     <div>
-                      <p className="p">nome_cientifico: </p>
+                      <p className="p">Nome Científico: </p>
                       <div className="modal-campos">
                         <input
                           type="text"
@@ -433,29 +433,33 @@ export const Admin = () => {
                     )}
                     {collectionType === 'terrenos' && (
                       <div>
-                        <p className="p">caracteristica: </p>
+                        <p className="p">Característica: </p>
                         <div className="modal-campos">
-                          <input
-                            type="text"
-                            value={newRecord.caracteristica || ''}
-                            onChange={(e) =>
-                              setNewRecord({ ...newRecord, caracteristica: e.target.value })
-                            }
-                          />
+                          <div className="sub-descricao">
+                            <textarea
+                              className='textarea'
+                              value={newRecord.caracteristica || ''}
+                              onChange={(e) =>
+                                setNewRecord({ ...newRecord, caracteristica: e.target.value })
+                              }
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
                     )}
                     {collectionType === 'pragas' && (
                       <div>
-                        <p className="p">combate: </p>
+                        <p className="p">Combate: </p>
                         <div className="modal-campos">
-                          <input
-                            type="text"
-                            value={newRecord.combate || ''}
-                            onChange={(e) =>
-                              setNewRecord({ ...newRecord, combate: e.target.value })
-                            }
-                          />
+                          <div className="sub-descricao">
+                            <textarea
+                              className='textarea'
+                              value={newRecord.combate || ''}
+                              onChange={(e) =>
+                                setNewRecord({ ...newRecord, combate: e.target.value })
+                              }
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -592,13 +596,15 @@ export const Admin = () => {
                         <div>
                           <p className='p'>Característica:</p>
                           <div className='modal-campos'>
-                            <input
-                              type="text"
-                              value={editedRecord.caracteristica}
-                              onChange={(e) =>
-                                setEditedRecord({ ...editedRecord, caracteristica: e.target.value })
-                              }
-                            />
+                            <div className="sub-descricao">
+                              <textarea
+                                className='textarea'
+                                value={editedRecord.caracteristica || ''}
+                                onChange={(e) =>
+                                  setNewRecord({ ...editedRecord, caracteristica: e.target.value })
+                                }
+                              ></textarea>
+                            </div>
                           </div>
                         </div>
 
@@ -607,13 +613,15 @@ export const Admin = () => {
                         <div>
                           <p className='p'>Combate:</p>
                           <div className='modal-campos'>
-                            <input
-                              type="text"
-                              value={editedRecord.combate}
-                              onChange={(e) =>
-                                setEditedRecord({ ...editedRecord, combate: e.target.value })
-                              }
-                            />
+                            <div className="sub-descricao">
+                              <textarea
+                                className='textarea'
+                                value={editedRecord.combate || ''}
+                                onChange={(e) =>
+                                  setNewRecord({ ...editedRecord, combate: e.target.value })
+                                }
+                              ></textarea>
+                            </div>
                           </div>
                         </div>
                       )}
