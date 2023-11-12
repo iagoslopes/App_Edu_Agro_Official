@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
@@ -14,7 +14,7 @@ function AuthPopup({ open, message, onClose }) {
         <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             open={open}
-            autoHideDuration={6000} // Define a duração que o pop-up ficará visível
+            autoHideDuration={3000} // Define a duração que o pop-up ficará visível
             onClose={onClose}
             message={<span style={messageStyle}>{message}</span>}
         />
@@ -33,29 +33,37 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
     const [senhas, setSenhas] = useState('');
 
     useEffect(() => {
+        let unsubscribe; // Declare a variável unsubscribe aqui
+    
         const loadUserInfo = async () => {
             try {
-                // Verifique se existe um documento no Firestore para o usuário atual
                 const userDocRef = doc(db, 'users', userEmail);
-
-                const userDocSnap = await getDoc(userDocRef);
-
-                if (userDocSnap.exists()) {
-                    // Se o documento existir, preencha os campos com os dados do Firestore
-                    const userData = userDocSnap.data();
-                    setNome(userData.nome || '');
-                    setDataNascimento(userData.dataNascimento || '');
-                    setSexo(userData.sexo || '');
-                }
+        
+                // Use onSnapshot para ouvir alterações no documento em tempo real
+                const unsubscribe = onSnapshot(userDocRef, (doc) => {
+                    if (doc.exists()) {
+                        const userData = doc.data();
+                        setNome(userData.nome || '');
+                        setDataNascimento(userData.dataNascimento || '');
+                        setSexo(userData.sexo || '');
+                    }
+                });
             } catch (error) {
-                setErros(error);
+                setErros(error.message || 'Ocorreu um erro'); // Use error.message para obter a mensagem de erro
                 setPopupOpen(true);
             }
         };
-
+    
         // Carregue as informações do usuário ao abrir o modal
         loadUserInfo();
-    }, [userEmail]); // Execute novamente se o email do usuário mudar
+    
+        return () => {
+            // Limpe a assinatura quando o componente for desmontado
+            if (unsubscribe) {
+                unsubscribe();
+            }
+        };
+    }, [userEmail]);
 
     const handleSalvar = async (e) => {
         e.preventDefault();
@@ -80,7 +88,8 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
             }
 
             // Feche o modal após salvar/atualizar
-            onClose();
+            setErros('Usuário atualizado com sucesso');
+            setPopupOpen(true);
         } catch (error) {
             setErros(error);
             setPopupOpen(true);
@@ -107,7 +116,41 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
 
     const handleClosePopup = () => {
         setPopupOpen(false);
-    }
+    };
+
+    const handleDataNascimentoChange = (e) => {
+        const inputDate = e.target.value;
+
+        // Remove caracteres não numéricos
+        const numericValue = inputDate.replace(/\D/g, '');
+
+        // Adapte a lógica conforme necessário para o seu caso
+        if (numericValue.length <= 8) {
+            // Formatação automática apenas quando houver números suficientes
+            setDataNascimento(formatarData(numericValue));
+        }
+    };
+
+    // Função para formatar a data em dd/mm/yyyy
+    const formatarData = (numericValue) => {
+        const dia = numericValue.slice(0, 2);
+        const mes = numericValue.slice(2, 4);
+        const ano = numericValue.slice(4, 8);
+
+        let formattedDate = '';
+
+        if (dia) {
+            formattedDate += dia;
+            if (mes) {
+                formattedDate += `/${mes}`;
+                if (ano) {
+                    formattedDate += `/${ano}`;
+                }
+            }
+        }
+
+        return formattedDate;
+    };
 
     return (
         <div className="configuracoes-modal">
@@ -147,9 +190,10 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
 
                     <label>Data de Nascimento:</label>
                     <input
-                        type="date"
+                        type="text"
                         value={dataNascimento}
-                        onChange={(e) => setDataNascimento(e.target.value)}
+                        onChange={handleDataNascimentoChange}
+                        placeholder="dd/mm/aaaa"
                     />
 
                     <label>Sexo:</label>
