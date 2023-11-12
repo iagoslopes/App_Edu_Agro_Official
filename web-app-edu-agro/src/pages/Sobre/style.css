@@ -13,17 +13,14 @@
     align-items: center;
     width: 100%;
     height: 46vh;
-    margin-top: 8vh;
+    margin-top: 10vh;
 }
 
 .missao-imagem {
     width: 250px;
-    height: 40vh;
     margin-right: 50vw;
-    background-image: url('Imagens/professora.jpg');
     background-position: center;
     background-size: cover;
-    border-radius: 5px;
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -56,13 +53,10 @@
 }
 
 .historia-imagem {
-    width: 400px;
-    height: 40vh;
+    width: 500px;
     margin-left: 50vw;
-    background-image: url('Imagens/horta2.jpg');
     background-position: center;
     background-size: cover;
-    border-radius: 5px;
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -138,6 +132,7 @@
 }
 
 @media screen and (max-width: 912px) {
+
     .missao-container,
     .historia-container {
         display: flex;
@@ -167,4 +162,38 @@
     .historia-imagem {
         width: 300px;
     }
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 75px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
 }
