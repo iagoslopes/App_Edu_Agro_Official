@@ -76,6 +76,7 @@
 .container-items {
     width: 100%;
     height: 89vh;
+    max-height: 89vh;
     padding: 10px;
     background-color: #e0e0e0;
     display: grid;
@@ -152,8 +153,8 @@
     }
 
     .modal .modal-content {
-        width: 90vw;
-        height: 98%;
+        width: 95vw;
+        height: 95vh;
         overflow-y: auto;
     }
 
@@ -162,22 +163,12 @@
         white-space: nowrap;
     }
 
-    .modal-content .modal-container .imagem {
-        width: 80%;
-        height: 70%;
-    }
-
     .modal-content .modal-container img {
         max-width: 100%;
         max-height: 100%;
     }
 
-    .modal .modal-content .modal-container .descricao {
-        width: 100%;
-        height: 40vh;
-    }
-
-    .modal-container .modal-campos .sub-descricao textarea {
+    .modal-content .modal-container .sub-descricao textarea {
         min-height: 20em;
         max-height: 30em;
     }
@@ -189,23 +180,24 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    max-height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
-    overflow-y: auto;
+    z-index: 9999;
 }
 
 .modal-content {
-    width: 50vw;
-    margin-top: 40vh;
-    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+    height: 95vh;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 6px 10px 6px rgba(0, 0, 0, 1);
-
+    overflow-y: auto;
 }
 
 .modal-container {
@@ -235,7 +227,7 @@
     box-shadow: 0px 6px 10px 6px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 1rem;
-    
+
 }
 
 .modal-container img {
