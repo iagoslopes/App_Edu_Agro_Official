@@ -2,16 +2,72 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '../../services/firebaseConfig';
 import Header from "../../components/Header";
 import Footer from '../../components/Footer';
+import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
 import './style.css';
+
+function AuthPopup({ open, message, onClose }) {
+    const messageStyle = {
+        fontSize: '18px',
+    };
+
+    const snackbarStyle = {
+        zIndex: 99999,
+        top: '9vh'
+    };
+
+    return (
+        <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={open}
+            autoHideDuration={3000} // Define a duração que o pop-up ficará visível
+            onClose={onClose}
+            message={<span style={messageStyle}>{message}</span>}
+            style={snackbarStyle}
+        />
+    );
+}
 
 export const Contato = () => {
     const [user, setUser] = useState(null);
+    const [isPopupOpen, setPopupOpen] = useState(false);
+    const [erros, setErros] = useState();
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [descricao, setDescricao] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setErros('Obrigado pelo seu feedback');
+        setPopupOpen(true);
+
+        try {
+            const response = await axios.post('https://education-agro.onrender.com/contato', {
+                nome,
+                email,
+                descricao,
+            });
+
+            console.log('Resposta da API:', response.data);
+        } catch (error) {
+            console.error('Erro ao enviar e-mail:', error.message);
+        }
+        setNome('');
+        setEmail('');
+        setDescricao('');
+    };
+
+    const handleClosePopup = () => {
+        setPopupOpen(false);
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             if (currentUser) {
                 if (currentUser.emailVerified) {
                     setUser(currentUser);
+                    setEmail(currentUser.email);
                 } else {
                     setUser(null);
                 }
@@ -32,14 +88,21 @@ export const Contato = () => {
             <section className='section-cat'>
 
                 <div className="contato-container"></div>
+                <AuthPopup open={isPopupOpen} message={erros} onClose={handleClosePopup} />
 
                 <div className='container-form'>
                     <div className='cont-form'>
                         <h2>Contate-nos</h2>
                         <div className="cat-form">
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-name">
-                                    <input className='cat-nome' type="text" placeholder='Nome' />
+                                    <input
+                                        className='cat-nome'
+                                        type="text"
+                                        placeholder='Nome'
+                                        value={nome}
+                                        onChange={(e) => setNome(e.target.value)}
+                                    />
                                 </div>
                                 {user ? (
                                     <div className="campo-email">
@@ -49,11 +112,24 @@ export const Contato = () => {
                                     </div>
                                 ) : (
                                     <div className="form-email">
-                                        <input className='cat-email' type="email" placeholder='E-mail' />
+                                        <input
+                                            className='cat-email'
+                                            type="email"
+                                            placeholder='E-mail'
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
                                     </div>
                                 )}
                                 <div className="form-textarea">
-                                    <textarea className='cat-desc' cols="50" rows="10" wrap="hard"></textarea>
+                                    <textarea
+                                        className='cat-desc'
+                                        cols="50"
+                                        rows="10"
+                                        wrap="hard"
+                                        value={descricao}
+                                        onChange={(e) => setDescricao(e.target.value)}
+                                    />
                                 </div>
                                 <div className="form-button">
                                     <button className='cat-btn'>Enviar</button>
