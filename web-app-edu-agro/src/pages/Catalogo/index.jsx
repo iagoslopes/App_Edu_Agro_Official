@@ -44,15 +44,18 @@ export const Catalogo = () => {
     };
 
     const filteredPlantas = plantas.filter((planta) =>
-        planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase())
+        planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase()) ||
+        planta.nome_cientifico.toLowerCase().includes(searchTermPlantas.toLowerCase())
     );
 
     const filteredTerrenos = terrenos.filter((terreno) =>
-        terreno.nome.toLowerCase().includes(searchTermTerrenos.toLowerCase())
+        terreno.nome.toLowerCase().includes(searchTermTerrenos.toLowerCase()) ||
+        terreno.nome_cientifico.toLowerCase().includes(searchTermTerrenos.toLowerCase())
     );
 
     const filteredPragas = pragas.filter((praga) =>
-        praga.nome.toLowerCase().includes(searchTermPragas.toLowerCase())
+        praga.nome.toLowerCase().includes(searchTermPragas.toLowerCase()) ||
+        praga.nome_cientifico.toLowerCase().includes(searchTermPragas.toLowerCase())
     );
 
     const handlePlantasClick = () => {

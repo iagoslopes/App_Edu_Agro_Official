@@ -119,23 +119,23 @@
     margin: 20px 1px 0;
 }
 
-.campo-email {
+.cat-form .campo-email {
     width: 100%;
     height: auto;
 }
 
-.campo-opaco {
+.cat-form .campo-opaco {
     display: flex;
     align-items: center;
     opacity: 0.7;
 }
 
-.campo-opaco:hover {
+.cat-form .campo-opaco:hover {
     background-color: #f0f0f0;
     cursor: not-allowed;
 }
 
-.campo-opaco span {
+.cat-form .campo-opaco span {
     font-size: 1em;
     flex-grow: 1;
     padding: 10px 12px;
@@ -230,7 +230,7 @@
         max-height: 20rem;
     }
 
-    .campo-opaco span {
+    .cat-form .campo-opaco span {
         font-size: 0.7em;
         padding: 10px 12px;
         word-wrap: break-word;
