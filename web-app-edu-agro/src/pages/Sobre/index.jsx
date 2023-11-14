@@ -10,11 +10,12 @@ import imagem3 from './Imagens/imagem3.jpeg';
 import imagem4 from './Imagens/imagem4.jpeg';
 import imagem5 from './Imagens/imagem5.jpg';
 import imagem6 from './Imagens/imagem6.jpg';
+import imagem7 from './Imagens/imagem7.jpeg';
 
 export const Sobre = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentIndex2, setCurrentIndex2] = useState(0);
-    const imagens = [imagem5, imagem1, imagem2];
+    const imagens = [imagem5, imagem1, imagem2, imagem7];
     const imagens2 = [imagem6, imagem3, imagem4];
 
     const handlePrev = () => {
