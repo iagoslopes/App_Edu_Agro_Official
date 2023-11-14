@@ -34,11 +34,11 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
 
     useEffect(() => {
         let unsubscribe; // Declare a variável unsubscribe aqui
-    
+
         const loadUserInfo = async () => {
             try {
                 const userDocRef = doc(db, 'users', userEmail);
-        
+
                 // Use onSnapshot para ouvir alterações no documento em tempo real
                 const unsubscribe = onSnapshot(userDocRef, (doc) => {
                     if (doc.exists()) {
@@ -53,10 +53,10 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
                 setPopupOpen(true);
             }
         };
-    
+
         // Carregue as informações do usuário ao abrir o modal
         loadUserInfo();
-    
+
         return () => {
             // Limpe a assinatura quando o componente for desmontado
             if (unsubscribe) {
