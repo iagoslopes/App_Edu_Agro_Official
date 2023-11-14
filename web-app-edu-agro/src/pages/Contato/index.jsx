@@ -100,6 +100,7 @@ export const Contato = () => {
                                         className='cat-nome'
                                         type="text"
                                         placeholder='Nome'
+                                        required
                                         value={nome}
                                         onChange={(e) => setNome(e.target.value)}
                                     />
@@ -116,6 +117,7 @@ export const Contato = () => {
                                             className='cat-email'
                                             type="email"
                                             placeholder='E-mail'
+                                            required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
@@ -127,6 +129,7 @@ export const Contato = () => {
                                         cols="50"
                                         rows="10"
                                         wrap="hard"
+                                        required
                                         value={descricao}
                                         onChange={(e) => setDescricao(e.target.value)}
                                     />
