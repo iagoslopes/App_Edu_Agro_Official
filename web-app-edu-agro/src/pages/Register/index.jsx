@@ -28,7 +28,6 @@ function AuthPopup({ open, message, onClose }) {
 
 export const Register = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = useState(null);
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -42,28 +41,27 @@ export const Register = () => {
 
   //Função de cadastro do usuário no firebase
   async function onSubmit(data) {
+    //Antes de qualquer coisa mostrar mensagem de carregando
     setErros('Carregando...');
     setPopupOpen(true);
-    await createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        sendEmailVerification(auth.currentUser)
-          .then(() => {
-            setErros('Cadastrado. Verifique seu e-mail, na sua caixa de spam ou lixo eletrônico');
-            setPopupOpen(true);
-          });
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          // Email já em uso
-          setErros('Este email já está em uso. Tente outro.');
-          setPopupOpen(true);
-        } else {
-          // Outros erros
-          setErros('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
-          setPopupOpen(true);
-        }
 
-      });
+    try {
+      //Solicitar o cadastro do firebaseAuth
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      //Envia o e-mail de verificação
+      await sendEmailVerification(auth.currentUser);
+
+      setErros('Cadastrado. Verifique seu e-mail, na sua caixa de spam ou lixo eletrônico');
+      setPopupOpen(true);
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        setErros('Este email já está em uso. Tente outro.');
+      } else {
+        setErros('Ocorreu um erro durante o cadastro. Por favor, tente novamente mais tarde.');
+      }
+
+      setPopupOpen(true);
+    }
   }
 
   //Função para fechar o PopUp com o tempo
@@ -83,7 +81,6 @@ export const Register = () => {
           //Não faça nada por que para logar é preciso verificar o e-mail então não é preciso colocar mais verificação
         }
       } else {
-        setUsers(null);
       }
     });
 
@@ -133,7 +130,7 @@ export const Register = () => {
                 {...register("password", { required: true, minLength: 6 })}
               ></input>
               <label htmlFor="password"
-                className={`floating ${watch('password') ? 'active' : ''}`}>Password</label>
+                className={`floating ${watch('password') ? 'active' : ''}`}>Senha</label>
               {errors?.password?.type === "required" && (
                 <p className="error-message">Senha é obrigatório.</p>
               )}
@@ -149,7 +146,8 @@ export const Register = () => {
             </button>
 
             <div className="login-link">
-              <p>Já tem uma conta? <Link className='register-link' to="/login">Entre</Link></p>
+              <p>Já tem uma conta? <Link className='register-link' to="/login">Conecte-se</Link></p>
+              <p><Link className='register-link' to="/">Voltar para HOME</Link></p>
             </div>
           </form>
         </div>

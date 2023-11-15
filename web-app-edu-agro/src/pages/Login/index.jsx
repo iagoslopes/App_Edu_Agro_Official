@@ -33,8 +33,6 @@ export const Login = () => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const user = auth.currentUser;
-
   //Função do hook-form para formatar os campos
   const {
     handleSubmit,
@@ -45,37 +43,42 @@ export const Login = () => {
 
   //Função de login do usuário no firebase
   async function onSubmit(data) {
+    //Antes de qualquer coisa mostrar mensagem de carregando
     setErros('Carregando...');
     setPopupOpen(true);
-    if (user && !user.emailVerified) {
-      setErros('E-mail não foi verificado ainda.');
-      setPopupOpen(true);
-    } else {
+
+    try {
       let persistenceType = browserLocalPersistence;
 
+      //Se "Lembrar-me" não estiver marcado, use a sessão
       if (!rememberMe) {
-        persistenceType = browserSessionPersistence; // Se "manter a sessão ativa" não estiver marcado, use a sessão
+        persistenceType = browserSessionPersistence;
       }
 
-      await setPersistence(auth, persistenceType)
-        .then(() => {
-          // Realize o login após definir a persistência
-          return signInWithEmailAndPassword(auth, data.email, data.password);
-        })
-        .then(() => {
-          navigate("/");
-        })
-        .catch((error) => {
-          if (error.code === 'auth/invalid-login-credentials') {
-            // Erro de credenciais
-            setErros('Usuário e/ou Senha incorreto');
-            setPopupOpen(true);
-          } else {
-            // Outros erros
-            setErros('Ocorreu um erro ao autenticar. Por favor, tente novamente mais tarde.');
-            setPopupOpen(true);
-          }
-        });
+      //Setar o persistenceType de acordo com rememberMe
+      await setPersistence(auth, persistenceType);
+      //Solicitar o login do firebaseAuth
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+
+      const currentUser = auth.currentUser;
+
+      //Verificar se o e-mail foi verificado após a ação de solicitar o login
+      if (currentUser && !currentUser.emailVerified) {
+        setErros('E-mail não foi verificado ainda.');
+        setPopupOpen(true);
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.code === 'auth/invalid-login-credentials') {
+        // Erro de credenciais (E-mail e/ou Senha)
+        setErros('Usuário e/ou Senha incorreto');
+        setPopupOpen(true);
+      } else {
+        // Outros erros
+        setErros('Ocorreu um erro ao autenticar. Por favor, tente novamente mais tarde.');
+        setPopupOpen(true);
+      }
     }
   }
 
@@ -145,7 +148,7 @@ export const Login = () => {
                 {...register("password", { required: true, minLength: 6 })}
               ></input>
               <label htmlFor="password"
-                className={`floating ${watch('password') ? 'active' : ''}`}>Password</label>
+                className={`floating ${watch('password') ? 'active' : ''}`}>Senha</label>
               {errors?.password?.type === "required" && (
                 <p className="error-message">Senha é obrigatório.</p>
               )}
@@ -167,6 +170,7 @@ export const Login = () => {
 
             <div className="link">
               <p>Não tem uma conta? <Link className='register-link' to="/register">Cadastre-se</Link></p>
+              <p><Link className='register-link' to="/">Voltar para HOME</Link></p>
             </div>
           </form>
         </div>
