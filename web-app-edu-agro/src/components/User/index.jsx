@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import './user.css';
 
+//Função para criar um PopUp de mensagem no top da tela
 function AuthPopup({ open, message, onClose }) {
     const messageStyle = {
         fontSize: '18px',
@@ -32,14 +33,15 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
     const [emails, setEmails] = useState('');
     const [senhas, setSenhas] = useState('');
 
+    //Função para mostrar as informações do usuário conforme e-mail de login
     useEffect(() => {
-        let unsubscribe; // Declare a variável unsubscribe aqui
+        let unsubscribe;
 
         const loadUserInfo = async () => {
             try {
                 const userDocRef = doc(db, 'users', userEmail);
 
-                // Use onSnapshot para ouvir alterações no documento em tempo real
+                //onSnapshot para ouvir alterações no documento em tempo real
                 const unsubscribe = onSnapshot(userDocRef, (doc) => {
                     if (doc.exists()) {
                         const userData = doc.data();
@@ -49,27 +51,28 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
                     }
                 });
             } catch (error) {
-                setErros(error.message || 'Ocorreu um erro'); // Use error.message para obter a mensagem de erro
+                setErros(error.message || 'Ocorreu um erro');
                 setPopupOpen(true);
             }
         };
 
-        // Carregue as informações do usuário ao abrir o modal
+        //Carregar as informações do usuário ao abrir o modal
         loadUserInfo();
 
         return () => {
-            // Limpe a assinatura quando o componente for desmontado
+            // Limpar a assinatura quando o componente for desmontado
             if (unsubscribe) {
                 unsubscribe();
             }
         };
     }, [userEmail]);
 
+    //Função para salvar ou criar novo registro no fireStore conforme o e-mail usado no login
     const handleSalvar = async (e) => {
         e.preventDefault();
 
         try {
-            // Crie ou atualize o documento no Firestore com as informações do usuário
+            //Criar ou atualizar o documento no Firestore com as informações do usuário
             const userDocRef = doc(db, 'users', userEmail);
             const userDocSnap = await getDoc(userDocRef);
 
@@ -80,14 +83,14 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
             };
 
             if (userDocSnap.exists()) {
-                // Documento existe, atualize
+                //Documento existe, atualize
                 await updateDoc(userDocRef, { nome, dataNascimento, sexo });
             } else {
-                // Documento não existe, crie
+                //Documento não existe, crie
                 await setDoc(userDocRef, { nome, dataNascimento, sexo });
             }
 
-            // Feche o modal após salvar/atualizar
+            //Mostrar o PopUp após salvar/atualizar
             setErros('Usuário atualizado com sucesso');
             setPopupOpen(true);
         } catch (error) {
@@ -96,35 +99,39 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
         }
     };
 
+    //Função para abrir o modal do admin
     const openModal = () => {
         setShowModal(true);
     };
 
+    //Função para fechar o modal do admin
     const closeModal = () => {
         setShowModal(false);
     };
 
+    //Função para redirecionar para o painel de admin
     const handleEntrar = () => {
         if (emails === 'admin' && senhas === 'admin') {
             // Redireciona para a página de admin
             navigate('/admin');
         } else {
-            // Lógica para lidar com credenciais incorretas, como exibir uma mensagem de erro
-            // ou realizar outras ações necessárias
+            //Caso esteja errado não fazer nada
         }
     };
 
+    //Fechar o PopUp de mensagem pelo tempo
     const handleClosePopup = () => {
         setPopupOpen(false);
     };
 
+    {/* Formatação do campo data Nascimento */ }
+    //Função para formatar o campo dataNascimento para não numérico
     const handleDataNascimentoChange = (e) => {
         const inputDate = e.target.value;
 
         // Remove caracteres não numéricos
         const numericValue = inputDate.replace(/\D/g, '');
 
-        // Adapte a lógica conforme necessário para o seu caso
         if (numericValue.length <= 8) {
             // Formatação automática apenas quando houver números suficientes
             setDataNascimento(formatarData(numericValue));
@@ -151,6 +158,7 @@ const ConfiguracoesUsuario = ({ userEmail, onClose }) => {
 
         return formattedDate;
     };
+    {/* Formatação do campo data Nascimento */ }
 
     return (
         <div className="configuracoes-modal">

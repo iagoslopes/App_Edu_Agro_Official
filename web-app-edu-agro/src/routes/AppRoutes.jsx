@@ -10,7 +10,6 @@ import { Sobre } from '../pages/Sobre';
 import { Admin } from '../pages/Admin';
 
 //Adicionando rotas
-
 export function AppRoutes() {
     return (
         <BrowserRouter>

@@ -12,14 +12,17 @@ export default function Header() {
     const [user, setUser] = useState(null);
     const [showConfiguracoesModal, setShowConfiguracoesModal] = useState(false);
 
+    //Função para abrir modal do perfil do usuário 
     const openConfiguracoesModal = () => {
         setShowConfiguracoesModal(true);
     };
 
+    //Função para fechar modal do perfil do usuário 
     const closeConfiguracoesModal = () => {
         setShowConfiguracoesModal(false);
     };
 
+    //Função de responsividade do menu 'Hamburguer'
     const navToggle = () => {
         active === 'nav_menu'
             ? setActive('nav_menu nav_active')
@@ -28,9 +31,9 @@ export default function Header() {
         toggleIcon === 'nav_toggler'
             ? setToggleIcon('nav_toggler toggle')
             : setToggleIcon('nav_toggler');
-
     };
 
+    //Função para deslogar o usuário
     const handleSignOut = async () => {
         try {
             await auth.signOut();
@@ -40,6 +43,7 @@ export default function Header() {
         }
     };
 
+    //Função para buscar o usuário logado e setar na variável a informação de login
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             if (currentUser) {
