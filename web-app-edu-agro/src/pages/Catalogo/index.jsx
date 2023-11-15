@@ -26,6 +26,14 @@ export const Catalogo = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedRecord, setSelectedRecord] = useState(null);
 
+    //Função para chamar a busca de registros da api caso ainda não tenha buscado todos os registros
+    useEffect(() => {
+        if (confirDadosChegaram === false) {
+            fetchData();
+        }
+    }, []);
+
+    //Função para puxar os registros da api
     const fetchData = async () => {
         try {
             const plantasData = await fetchPlantasData();
@@ -43,21 +51,25 @@ export const Catalogo = () => {
         }
     };
 
+    //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
     const filteredPlantas = plantas.filter((planta) =>
         planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase()) ||
         planta.nome_cientifico.toLowerCase().includes(searchTermPlantas.toLowerCase())
     );
 
+    //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
     const filteredTerrenos = terrenos.filter((terreno) =>
         terreno.nome.toLowerCase().includes(searchTermTerrenos.toLowerCase()) ||
         terreno.nome_cientifico.toLowerCase().includes(searchTermTerrenos.toLowerCase())
     );
 
+    //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
     const filteredPragas = pragas.filter((praga) =>
         praga.nome.toLowerCase().includes(searchTermPragas.toLowerCase()) ||
         praga.nome_cientifico.toLowerCase().includes(searchTermPragas.toLowerCase())
     );
 
+    //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
     const handlePlantasClick = () => {
         setShowRecords(true);
         setActiveButton("plantas");
@@ -66,6 +78,7 @@ export const Catalogo = () => {
         setShowSearchPragas(false);
     };
 
+    //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
     const handleTerrenosClick = () => {
         setShowRecords(true);
         setActiveButton("terrenos");
@@ -74,6 +87,7 @@ export const Catalogo = () => {
         setShowSearchPragas(false);
     };
 
+    //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
     const handlePragasClick = () => {
         setShowRecords(true);
         setActiveButton("pragas");
@@ -82,22 +96,19 @@ export const Catalogo = () => {
         setShowSearchPragas(true);
     };
 
+    //Função para guardar as informações do registro selecionado e mostrar as informações no modal
     const handleRecordClick = (record) => {
         setSelectedRecord(record);
         setShowModal(true);
     };
 
+    //Função para fechar o modal das informações do registro e setar selectedRecord como null
     const closeModal = () => {
         setSelectedRecord(null);
         setShowModal(false);
     };
 
-    useEffect(() => {
-        if (confirDadosChegaram === false) {
-            fetchData(); // Chame a função assíncrona para buscar os dados
-        }
-    }, []);
-
+    //Função para verificar se tem algum usuário logado, se não enviar para o login
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             if (!currentUser) {

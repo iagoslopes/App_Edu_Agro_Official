@@ -6,6 +6,7 @@ import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import './style.css';
 
+//Função de criação do PopUp de mensagem
 function AuthPopup({ open, message, onClose }) {
     const messageStyle = {
         fontSize: '18px',
@@ -36,6 +37,7 @@ export const Contato = () => {
     const [email, setEmail] = useState('');
     const [descricao, setDescricao] = useState('');
 
+    //Função para enviar as informações do contato para o banco de dados
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -58,10 +60,12 @@ export const Contato = () => {
         setDescricao('');
     };
 
+    //Função para fechar o PopUp com o tempo
     const handleClosePopup = () => {
         setPopupOpen(false);
     }
 
+    //Função para verificar se existe usuário logado e se existir setar na variável setEmail e setUser
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             if (currentUser) {

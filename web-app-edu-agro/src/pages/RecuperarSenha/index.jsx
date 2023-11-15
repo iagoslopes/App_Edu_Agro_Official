@@ -6,7 +6,7 @@ import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
 import './style.css';
 
-
+//Função de criação do PopUp de mensagem
 function AuthPopup({ open, message, onClose }) {
     const messageStyle = {
         fontSize: '18px',
@@ -28,10 +28,12 @@ export const RecuperarSenha = () => {
     const [isPopupOpen, setPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
+    //Função para fechar o PopUp com o tempo
     const handleClosePopup = () => {
         setPopupOpen(false);
     }
 
+    //Função para o envio do e-mail de recuperação de senha
     function resetPassword() {
         setErros('Carregando...');
         setPopupOpen(true);
@@ -57,7 +59,6 @@ export const RecuperarSenha = () => {
                     setPopupOpen(true);
                 }
             });
-
     }
 
     return (
@@ -82,8 +83,6 @@ export const RecuperarSenha = () => {
                         <button type='button' onClick={resetPassword} className="button-recuperar" id='button'>
                             Enviar
                         </button>
-
-                        
 
                         <div className="footer">
                             <Link to="/login">Voltar</Link>

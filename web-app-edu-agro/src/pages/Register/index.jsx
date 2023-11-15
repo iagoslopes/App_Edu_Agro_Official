@@ -4,12 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConfig';
 import { useForm } from 'react-hook-form';
 import { isEmail } from "validator";
-import logo from '../../assets/img_logo.png';
 import Snackbar from '@mui/material/Snackbar';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { HiOutlineMail } from 'react-icons/hi';
 import './style.css';
 
+//Função de criação do PopUp de mensagem
 function AuthPopup({ open, message, onClose }) {
   const messageStyle = {
     fontSize: '18px',
@@ -32,6 +32,7 @@ export const Register = () => {
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
 
+  //Função do hook-form para formatar os campos
   const {
     handleSubmit,
     formState: { errors },
@@ -39,6 +40,7 @@ export const Register = () => {
     watch,
   } = useForm();
 
+  //Função de cadastro do usuário no firebase
   async function onSubmit(data) {
     setErros('Carregando...');
     setPopupOpen(true);
@@ -64,10 +66,12 @@ export const Register = () => {
       });
   }
 
+  //Função para fechar o PopUp com o tempo
   const handleClosePopup = () => {
     setPopupOpen(false);
   }
 
+  //Função para verificar se o usuário ja esta logado e não deixar entrar na página
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
@@ -76,8 +80,7 @@ export const Register = () => {
           // O usuário está registrado e verificou o e-mail, então vá para a página inicial
           navigate('/');
         } else {
-          // O usuário ainda não verificou o e-mail, você pode mostrar uma mensagem para verificar o e-mail ou redirecionar para uma página de verificação de e-mail
-          // Neste exemplo, redirecionamos para uma página de verificação de e-mail
+          //Não faça nada por que para logar é preciso verificar o e-mail então não é preciso colocar mais verificação
         }
       } else {
         setUsers(null);

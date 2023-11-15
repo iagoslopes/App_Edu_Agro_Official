@@ -3,7 +3,9 @@ import Header from "../../components/Header";
 import Footer from '../../components/Footer';
 import CookiePopup from '../../components/Cookie';
 import { FaGooglePlay } from 'react-icons/fa';
+import './style.css';
 
+//Import das imagens
 import hill01 from './Parallax/hill1.png';
 import hill02 from './Parallax/hill2.png';
 import hill03 from './Parallax/hill3.png';
@@ -14,12 +16,11 @@ import leaf0 from './Parallax/leaf.png';
 import plant0 from './Parallax/plant.png';
 import celular from './Imagens/Celular.png';
 
-import './style.css';
-
 export const Home = () => {
     const [offsetY, setOffsetY] = useState(0);
     const handleScroll = () => setOffsetY(window.pageYOffset);
 
+    //Função para o evento de rolagem da página que faz o efeito de parallax
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
@@ -59,13 +60,13 @@ export const Home = () => {
                         <p>Explore o maravilhoso mundo das plantas com nosso aplicativo!</p>
                         <a href="#">
                             <div className="icon_user">
-                                <FaGooglePlay size={48} color='black'/>Disponível na Play Store
+                                <FaGooglePlay size={48} color='black' />Disponível na Play Store
                             </div>
                         </a>
                     </div>
                     <div className="celular">
                         <img src={celular} id='celular'
-                         />
+                        />
                     </div>
                 </div>
             </section>

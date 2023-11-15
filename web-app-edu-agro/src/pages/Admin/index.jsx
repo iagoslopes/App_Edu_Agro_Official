@@ -33,16 +33,44 @@ export const Admin = () => {
   const [newRecord, setNewRecord] = useState({});
   const [collectionType, setCollectionType] = useState(null);
 
+  //Função para chamar a busca de registros da api caso ainda não tenha buscado todos os registros
+  useEffect(() => {
+    if (confirDadosChegaram === false) {
+      fetchData();
+    }
+  }, []);
+
+  //Função para puxar os registros da api
+  const fetchData = async () => {
+    try {
+      const plantasData = await fetchPlantasData();
+      setPlantas(plantasData);
+
+      const terrenosData = await fetchTerrenosData();
+      setTerrenos(terrenosData);
+
+      const pragasData = await fetchPragasData();
+      setPragas(pragasData);
+
+      setConfirDadosChegaram(true);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  //Função para abrir o modal de criação e selecionar qual registro vai criar
   const handleOpenCreate = () => {
     setOpenCreateModal(true);
   };
 
+  //Função para abrir o modal com as informações do registro de acordo com o botão selecionado
   const handleCreateClick = () => {
     setOpenCreateModal(false);
     setShowCreateModal(true);
     setNewRecord({});
   };
 
+  //Função para criar um registro de acordo com o botão selecionado
   const handleCreateRecord = async () => {
     try {
       if (collectionType === 'plantas') {
@@ -59,6 +87,7 @@ export const Admin = () => {
     }
   };
 
+  //Função para editar um registro de acordo com o botão selecionado
   const handleSaveEditedRecord = async () => {
     if (activeButton === 'plantas' && editedRecord) {
       await updatePlant(editedRecord._id, editedRecord);
@@ -77,6 +106,7 @@ export const Admin = () => {
     }
   };
 
+  //Função para deletar um registro de acordo com o botão selecionado
   const handleDeleteConfirmation = async () => {
     if (activeButton === 'plantas' && recordToDelete) {
       await deletePlanta(recordToDelete._id);
@@ -103,41 +133,25 @@ export const Admin = () => {
     setSelectedAction(action);
   };
 
-  const fetchData = async () => {
-    try {
-      const plantasData = await fetchPlantasData();
-      setPlantas(plantasData);
-
-      const terrenosData = await fetchTerrenosData();
-      setTerrenos(terrenosData);
-
-      const pragasData = await fetchPragasData();
-      setPragas(pragasData);
-
-      setConfirDadosChegaram(true);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (confirDadosChegaram === false) {
-      fetchData();
-    }
-  }, []);
-
+  //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
   const filteredPlantas = plantas.filter((planta) =>
-    planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase())
+    planta.nome.toLowerCase().includes(searchTermPlantas.toLowerCase()) ||
+    planta.nome_cientifico.toLowerCase().includes(searchTermPlantas.toLowerCase())
   );
 
+  //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
   const filteredTerrenos = terrenos.filter((terreno) =>
-    terreno.nome.toLowerCase().includes(searchTermTerrenos.toLowerCase())
+    terreno.nome.toLowerCase().includes(searchTermTerrenos.toLowerCase()) ||
+    terreno.nome_cientifico.toLowerCase().includes(searchTermTerrenos.toLowerCase())
   );
 
+  //Função para filtrar os registros da api e mostrar somente oq esta no campo de busca
   const filteredPragas = pragas.filter((praga) =>
-    praga.nome.toLowerCase().includes(searchTermPragas.toLowerCase())
+    praga.nome.toLowerCase().includes(searchTermPragas.toLowerCase()) ||
+    praga.nome_cientifico.toLowerCase().includes(searchTermPragas.toLowerCase())
   );
 
+  //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
   const handlePlantasClick = () => {
     setShowRecords(true);
     setActiveButton("plantas");
@@ -146,6 +160,7 @@ export const Admin = () => {
     setShowSearchPragas(false);
   };
 
+  //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
   const handleTerrenosClick = () => {
     setShowRecords(true);
     setActiveButton("terrenos");
@@ -154,6 +169,7 @@ export const Admin = () => {
     setShowSearchPragas(false);
   };
 
+  //Função para setar todos os dados necessários para puxar as telas correspondente ao botão selecionado
   const handlePragasClick = () => {
     setShowRecords(true);
     setActiveButton("pragas");
@@ -162,6 +178,7 @@ export const Admin = () => {
     setShowSearchPragas(true);
   };
 
+  //Função para abrir o modal de acordo com o botão clicado (Visualiazar, excluir, editar) e salvar as informações do registro
   const handleRecordClick = (record) => {
     setSelectedRecord(record);
 
@@ -176,11 +193,13 @@ export const Admin = () => {
     }
   };
 
+  //Função para fechar o modal das informações do registro e setar selectedRecord como null
   const closeModal = () => {
     setSelectedRecord(null);
     setShowModal(false);
   };
 
+  //Função para verificar se tem algum usuário logado, se não enviar para a home
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
