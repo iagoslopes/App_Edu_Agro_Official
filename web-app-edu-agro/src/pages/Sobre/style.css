@@ -36,11 +36,18 @@
 }
 
 .missao-container .missao p {
+    font-weight: bold;
     font-size: 2em;
 }
 
 .missao-container .missao span {
     font-size: 1.2em;
+}
+
+.missao-container .missao span span {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .espaco {
@@ -75,11 +82,18 @@
 }
 
 .historia-container .historia p {
+    font-weight: bold;
     font-size: 2em;
 }
 
 .historia-container .historia span {
     font-size: 1.3em;
+}
+
+.historia-container .historia span span {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .feedback-container {
