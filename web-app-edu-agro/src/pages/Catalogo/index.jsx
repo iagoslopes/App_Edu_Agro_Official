@@ -108,6 +108,14 @@ export const Catalogo = () => {
         setShowModal(false);
     };
 
+    const handleModalClick = (e) => {
+        // Verificar se o clique foi fora do conteúdo do modal
+        if (e.target.classList.contains('modal')) {
+            // Fechar o modal aqui
+            closeModal();
+        }
+    };
+
     //Função para verificar se tem algum usuário logado, se não enviar para o login
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -195,14 +203,14 @@ export const Catalogo = () => {
                             activeButton === "plantas" ? (
                                 // Renderize os registros de plantas aqui
                                 filteredPlantas.map((planta, index) => (
-                                    <div key={index} className='registros-item'>
+                                    <div key={index} className='registros-item' onClick={() => handleRecordClick(planta)}>
                                         <div className='registros'>
                                             <img src={planta.foto} alt={planta.nome} className='foto' />
                                             <div className='informacoes'>
                                                 <span className='title'>{planta.nome}</span>
                                                 <span className='subtitle'>{planta.nome_cientifico}</span>
                                             </div>
-                                            <button onClick={() => handleRecordClick(planta)} className='visualizar'>
+                                            <button className='visualizar'>
                                                 Visualizar
                                             </button>
                                         </div>
@@ -211,14 +219,14 @@ export const Catalogo = () => {
                             ) : activeButton === "terrenos" ? (
                                 // Renderize os registros de terrenos aqui
                                 filteredTerrenos.map((terreno, index) => (
-                                    <div key={index} className='registros-item'>
+                                    <div key={index} className='registros-item' onClick={() => handleRecordClick(terreno)}>
                                         <div className='registros'>
                                             <img src={terreno.foto} alt={terreno.nome} className='foto' />
                                             <div className='informacoes'>
                                                 <span className='title'>{terreno.nome}</span>
                                                 <span className='subtitle'>{terreno.nome_cientifico}</span>
                                             </div>
-                                            <button onClick={() => handleRecordClick(terreno)} className='visualizar'>
+                                            <button className='visualizar'>
                                                 Visualizar
                                             </button>
                                         </div>
@@ -227,14 +235,14 @@ export const Catalogo = () => {
                             ) : activeButton === "pragas" ? (
                                 // Renderize os registros de pragas aqui
                                 filteredPragas.map((praga, index) => (
-                                    <div key={index} className='registros-item'>
+                                    <div key={index} className='registros-item' onClick={() => handleRecordClick(praga)}>
                                         <div className='registros'>
                                             <img src={praga.foto} alt={praga.nome} className='foto' />
                                             <div className='informacoes'>
                                                 <span className='title'>{praga.nome}</span>
                                                 <span className='subtitle'>{praga.nome_cientifico}</span>
                                             </div>
-                                            <button onClick={() => handleRecordClick(praga)} className='visualizar'>
+                                            <button className='visualizar'>
                                                 Visualizar
                                             </button>
                                         </div>
@@ -249,7 +257,7 @@ export const Catalogo = () => {
                         )}
 
                         {showModal && (
-                            <div className="modal">
+                            <div className="modal" onClick={handleModalClick}>
                                 <div className="modal-content">
                                     {selectedRecord && (
                                         <div className='modal-container'>
