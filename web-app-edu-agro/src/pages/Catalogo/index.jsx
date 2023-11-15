@@ -114,6 +114,11 @@ export const Catalogo = () => {
             if (!currentUser) {
                 navigate('/login');
                 return null;
+            } else if (currentUser) {
+                if (currentUser.emailVerified) {
+                } else {
+                    navigate('/login');
+                }
             } else {
                 setUser(null);
             }
