@@ -23,3 +23,13 @@ Admin: [
 ],
 Contato: 'API node.js'
 };
+
+## Integrantes do Grupo:
+
+Bryan Braggion Pimentel de Lima
+
+Caroline de Souza Dainezi
+
+Iago de Souza Lopes
+
+Murillo Lazarini
