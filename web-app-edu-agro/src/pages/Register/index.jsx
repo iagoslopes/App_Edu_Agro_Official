@@ -30,6 +30,7 @@ export const Register = () => {
   const navigate = useNavigate();
   const [erros, setErros] = useState();
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   //Função do hook-form para formatar os campos
   const {
@@ -121,10 +122,10 @@ export const Register = () => {
             </div>
 
             <div className="inputbox">
-              <div className="icon"><RiLockPasswordLine /></div>
+              <div className="icon" onClick={() => setShowPassword(!showPassword)}><RiLockPasswordLine /></div>
               <input
                 className={errors?.password && "input-error"}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete='off'
                 {...register("password", { required: true, minLength: 6 })}
