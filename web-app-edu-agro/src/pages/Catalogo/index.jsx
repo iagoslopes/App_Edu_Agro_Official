@@ -308,6 +308,16 @@ export const Catalogo = () => {
                                                 </div>
 
                                             )}
+                                            <div className="descricao">
+                                                <p className='p'>Descrição: </p>
+                                                <div className="sub-descricao">
+                                                    <textarea
+                                                        className='textarea'
+                                                        value={selectedRecord.descricao}
+                                                        readOnly={true}
+                                                    ></textarea>
+                                                </div>
+                                            </div>
                                             {selectedRecord.cultivo && (
                                                 <div>
                                                     <p className='p'>Cultivo: </p>
@@ -340,16 +350,6 @@ export const Catalogo = () => {
                                                     </div>
                                                 </div>
                                             )}
-                                            <div className="descricao">
-                                                <p className='p'>Descrição: </p>
-                                                <div className="sub-descricao">
-                                                    <textarea
-                                                        className='textarea'
-                                                        value={selectedRecord.descricao}
-                                                        readOnly={true}
-                                                    ></textarea>
-                                                </div>
-                                            </div>
                                         </div>
                                     )}
                                     <div className='modal-close'>
