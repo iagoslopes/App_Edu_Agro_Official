@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { auth } from '../../services/firebaseConfig';
 import Header from "../../components/Header";
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
+import copy from "copy-to-clipboard";
 import './style.css';
 
 //Função de criação do PopUp de mensagem
@@ -36,6 +37,32 @@ export const Contato = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [descricao, setDescricao] = useState('');
+    const [emailCopied, setEmailCopied] = useState(false);
+    const [emailSpanClass, setEmailSpanClass] = useState('');
+
+    const handleEmailCopy = () => {
+        //Texto que será copiado
+        const copyText = 'educationagro-contato@gmail.com';
+
+        //Função para copiar o texto
+        copy(copyText);
+
+        //Adiciona a classe ao <span> ao copiar o e-mail
+        setEmailSpanClass('email-copied');
+
+        //Reverte a classe após 0.5 segundos
+        setTimeout(() => {
+            setEmailSpanClass('');
+        }, 500);
+
+        //Atualiza o estado para refletir que o e-mail foi copiado
+        setEmailCopied(true);
+
+        //Reverte o estado após 2 segundos
+        setTimeout(() => {
+            setEmailCopied(false);
+        }, 2000);
+    };
 
     //Função para enviar as informações do contato para o banco de dados
     const handleSubmit = async (e) => {
@@ -156,7 +183,14 @@ export const Contato = () => {
                     <div className="cont-email">
                         <div className="mail">
                             <h5 className='title-email'>E-mail para contato</h5>
-                            <p className='desc-email'>educationagro-contato@gmail.com</p>
+                            <div className='EmailCopy'>
+                                <span className={emailSpanClass}>
+                                    educationagro-contato@gmail.com
+                                </span>
+                                <button onClick={handleEmailCopy} disabled={emailCopied}>
+                                    {emailCopied ? 'E-mail Copiado' : 'Copiar E-mail'}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

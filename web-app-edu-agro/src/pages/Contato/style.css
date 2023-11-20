@@ -86,11 +86,11 @@
 
 .container-infos {
     position: absolute;
-    width: 400px;
+    width: 450px;
     padding: 20px;
     background-color: transparent;
     z-index: 1;
-    left: 10%;
+    left: 5%;
 }
 
 .cont-telefone,
@@ -98,6 +98,41 @@
     padding: 20px 30px 15px;
     max-width: 100%;
     color: #ffffff;
+}
+
+.cont-email .mail .EmailCopy {
+    display: flex;
+    flex-direction: column;
+}
+
+.cont-email .mail .EmailCopy span {
+    color: black;
+    background-color: white;
+    padding: 10px 20px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.email-copied {
+    background-color: #ffffff;
+    animation: blink 0.5s ease-out;
+}
+
+@keyframes blink {
+    50% {
+        background-color: transparent;
+    }
+}
+
+.cont-email .mail .EmailCopy button {
+    width: 100%;
+    background: linear-gradient(#ffffff 10%, darkgreen 90%);
+    color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .title-tel,
@@ -144,6 +179,12 @@
     padding-left: 28px;
     text-align: start;
     border-bottom: 2px solid black;
+}
+
+@media screen and (max-width: 1020px) {
+    .container-infos {
+        left: 0%;
+    }
 }
 
 @media screen and (max-width: 912px) {
